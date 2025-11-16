@@ -38,6 +38,11 @@ require(['jquery', 'Magento_Ui/js/modal/alert'], function($, alert) {
                     $('#greenview_validate_result').html(
                         '<span style="color: #006400; font-weight: bold;">✓ ' + response.message + '</span>'
                     );
+
+                    // Reload page after 1.5 seconds to refresh connection status
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
                 } else {
                     var debugHtml = '';
                     if (response.debug) {
