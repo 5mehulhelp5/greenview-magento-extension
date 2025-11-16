@@ -11,6 +11,7 @@
     <update handle="styles"/>
     <body>
         <referenceContainer name="content">
+            <block class="GreenView\Viewer\Block\Adminhtml\Splats\LastSync" name="greenview.splats.last_sync" before="greenview_splats_listing"/>
             <uiComponent name="greenview_splats_listing"/>
         </referenceContainer>
     </body>

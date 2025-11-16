@@ -1,0 +1,50 @@
+{
+    "greenview_splats": {
+        "column": {
+            "id": true,
+            "name": true,
+            "description": true,
+            "slug": true,
+            "file_type": true,
+            "file_url": true,
+            "file_ar_url": true,
+            "thumbnail_url": true,
+            "ar_short_link": true,
+            "viewer_short_link": true,
+            "ar_enabled": true,
+            "plugin_config": true,
+            "created_at": true,
+            "updated_at": true,
+            "data_json": true
+        },
+        "index": {
+            "GREENVIEW_SPLATS_SLUG": true,
+            "GREENVIEW_SPLATS_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "greenview_api_logs": {
+        "column": {
+            "log_id": true,
+            "timestamp": true,
+            "operation": true,
+            "url": true,
+            "request_headers": true,
+            "request_timeout": true,
+            "error_message": true,
+            "response_code": true,
+            "response_body_preview": true,
+            "user_ip": true,
+            "user_agent": true
+        },
+        "index": {
+            "GREENVIEW_API_LOGS_TIMESTAMP": true,
+            "GREENVIEW_API_LOGS_OPERATION": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

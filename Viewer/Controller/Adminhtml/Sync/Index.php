@@ -13,10 +13,12 @@ namespace GreenView\Viewer\Controller\Adminhtml\Sync;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use GreenView\Viewer\Service\SplatManager;
+use Magento\Framework\App\Config\Storage\WriterInterface;
 
 class Index extends Action
 {
     const ADMIN_RESOURCE = 'GreenView_Viewer::sync';
+    const CONFIG_PATH_LAST_SYNC = 'greenview_viewer/sync/last_sync_time';
 
     /**
      * @var SplatManager
@@ -24,15 +26,23 @@ class Index extends Action
     protected $splatManager;
 
     /**
+     * @var WriterInterface
+     */
+    protected $configWriter;
+
+    /**
      * @param Context $context
      * @param SplatManager $splatManager
+     * @param WriterInterface $configWriter
      */
     public function __construct(
         Context $context,
-        SplatManager $splatManager
+        SplatManager $splatManager,
+        WriterInterface $configWriter
     ) {
         parent::__construct($context);
         $this->splatManager = $splatManager;
+        $this->configWriter = $configWriter;
     }
 
     /**
@@ -44,6 +54,10 @@ class Index extends Action
     {
         try {
             $count = $this->splatManager->syncSplats();
+
+            // Save last sync timestamp
+            $this->configWriter->save(self::CONFIG_PATH_LAST_SYNC, time());
+
             $this->messageManager->addSuccessMessage(
                 __('Successfully synced %1 splat(s) from GreenView API', $count)
             );
