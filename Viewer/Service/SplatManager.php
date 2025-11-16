@@ -15,6 +15,7 @@ use GreenView\Viewer\Model\ResourceModel\Splat as SplatResource;
 use GreenView\Viewer\Model\ResourceModel\Splat\CollectionFactory as SplatCollectionFactory;
 use GreenView\Viewer\Service\ApiClient;
 use Psr\Log\LoggerInterface;
+use Magento\Framework\App\ResourceConnection;
 
 class SplatManager
 {
@@ -44,24 +45,32 @@ class SplatManager
     protected $logger;
 
     /**
+     * @var ResourceConnection
+     */
+    protected $resourceConnection;
+
+    /**
      * @param ApiClient $apiClient
      * @param SplatFactory $splatFactory
      * @param SplatResource $splatResource
      * @param SplatCollectionFactory $splatCollectionFactory
      * @param LoggerInterface $logger
+     * @param ResourceConnection $resourceConnection
      */
     public function __construct(
         ApiClient $apiClient,
         SplatFactory $splatFactory,
         SplatResource $splatResource,
         SplatCollectionFactory $splatCollectionFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        ResourceConnection $resourceConnection
     ) {
         $this->apiClient = $apiClient;
         $this->splatFactory = $splatFactory;
         $this->splatResource = $splatResource;
         $this->splatCollectionFactory = $splatCollectionFactory;
         $this->logger = $logger;
+        $this->resourceConnection = $resourceConnection;
     }
 
     /**
@@ -121,13 +130,10 @@ class SplatManager
      */
     protected function storeSplat(array $data)
     {
-        /** @var \GreenView\Viewer\Model\Splat $splat */
-        $splat = $this->splatFactory->create();
+        $connection = $this->resourceConnection->getConnection();
+        $tableName = $this->resourceConnection->getTableName('greenview_splats');
 
-        // Check if already exists
-        $this->splatResource->load($splat, $data['id'], 'id');
-
-        $splat->setData([
+        $insertData = [
             'id' => $data['id'],
             'name' => $data['name'],
             'description' => $data['description'] ?? '',
@@ -140,15 +146,12 @@ class SplatManager
             'viewer_short_link' => $data['viewerShortLink'] ?? '',
             'ar_enabled' => isset($data['arEnabled']) ? (int)$data['arEnabled'] : 1,
             'created_at' => $data['createdAt'] ?? null,
-            'updated_at' => $data['updatedAt'] ?? null
-        ]);
+            'updated_at' => $data['updatedAt'] ?? null,
+            'plugin_config' => isset($data['pluginConfig']) ? json_encode($data['pluginConfig']) : null,
+            'data_json' => json_encode($data)
+        ];
 
-        if (isset($data['pluginConfig'])) {
-            $splat->setPluginConfigArray($data['pluginConfig']);
-        }
-
-        $splat->setDataJsonArray($data);
-        $this->splatResource->save($splat);
+        $connection->insertOnDuplicate($tableName, $insertData);
     }
 
     /**
