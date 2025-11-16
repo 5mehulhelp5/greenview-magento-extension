@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Default Frontend Layout
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="GreenView_Viewer::js/cds-splat.iife.js"/>
+        <css src="GreenView_Viewer::css/greenview-viewer.css"/>
+    </head>
+</page>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * ACL Configuration
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="GreenView_Viewer::greenview" title="GreenView" sortOrder="70">
+                    <resource id="GreenView_Viewer::splats" title="Manage Splats" sortOrder="10"/>
+                    <resource id="GreenView_Viewer::sync" title="Sync Splats" sortOrder="20"/>
+                    <resource id="GreenView_Viewer::logs" title="API Logs" sortOrder="30"/>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="GreenView_Viewer::config" title="GreenView 3D Viewer Settings"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

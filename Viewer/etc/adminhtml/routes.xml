@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Admin Routes Configuration
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="greenview" frontName="greenview">
+            <module name="GreenView_Viewer" />
+        </route>
+    </router>
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * GreenView 3D Viewer Module Configuration
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ * @author     Indra Gunanda
+ * @copyright  Copyright (c) 2024 GreenView
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="GreenView_Viewer" setup_version="3.1.1">
+        <sequence>
+            <module name="Magento_Backend"/>
+            <module name="Magento_Cms"/>
+            <module name="Magento_Widget"/>
+        </sequence>
+    </module>
+</config>

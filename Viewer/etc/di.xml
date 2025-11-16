@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Dependency Injection Configuration
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- UI Component Data Providers -->
+    <virtualType name="GreenView\Viewer\Model\ResourceModel\Splat\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">greenview_splats</argument>
+            <argument name="resourceModel" xsi:type="string">GreenView\Viewer\Model\ResourceModel\Splat</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="GreenView\Viewer\Model\ResourceModel\ApiLog\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">greenview_api_logs</argument>
+            <argument name="resourceModel" xsi:type="string">GreenView\Viewer\Model\ResourceModel\ApiLog</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="greenview_splats_listing_data_source" xsi:type="string">GreenView\Viewer\Model\ResourceModel\Splat\Grid\Collection</item>
+                <item name="greenview_logs_listing_data_source" xsi:type="string">GreenView\Viewer\Model\ResourceModel\ApiLog\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

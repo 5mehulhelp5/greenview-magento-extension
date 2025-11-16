@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Admin System Configuration
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="greenview" translate="label" sortOrder="400">
+            <label>GreenView</label>
+        </tab>
+        <section id="greenview_viewer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>3D Viewer Settings</label>
+            <tab>greenview</tab>
+            <resource>GreenView_Viewer::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable/Disable GreenView 3D Viewer functionality</comment>
+                </field>
+                <field id="company_token" translate="label" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Company API Token</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <comment>Enter your GreenView company token from https://green-view.nl</comment>
+                </field>
+                <field id="sandbox_mode" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sandbox Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Use staging API (https://api-stg.green-view.nl) instead of production</comment>
+                </field>
+                <field id="validate_token" translate="label" type="button" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Validate Token</label>
+                    <frontend_model>GreenView\Viewer\Block\Adminhtml\System\Config\ValidateButton</frontend_model>
+                    <comment>Click to validate your API token</comment>
+                </field>
+            </group>
+            <group id="cache" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cache Settings</label>
+                <field id="cache_lifetime" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cache Lifetime (seconds)</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <comment>Default: 86400 (24 hours). Set to 0 to disable caching.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

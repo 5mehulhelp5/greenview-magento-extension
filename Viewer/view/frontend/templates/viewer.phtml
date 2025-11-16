@@ -1,0 +1,40 @@
+<?php
+/**
+ * 3D Viewer Template
+ *
+ * @var $block \GreenView\Viewer\Block\Viewer
+ */
+$splatData = $block->getSplatData();
+$fileUrl = $block->getSplatFileUrl();
+
+if (!$splatData || !$fileUrl): ?>
+    <div class="greenview-error">
+        <p><?= __('Error: Splat not found or file unavailable.') ?></p>
+    </div>
+<?php return; endif;
+
+$width = $block->getWidth();
+$height = $block->getHeight();
+$animate = $block->isAnimationEnabled();
+$customClass = $block->getCustomClass();
+$customStyle = $block->getCustomStyle();
+$position = $block->getPosition();
+$scale = $block->getScale();
+$initialCameraPosition = $block->getInitialCameraPosition();
+$useObserver = $block->useObserver();
+$thumbnailUrl = $splatData['thumbnailUrl'] ?? '';
+
+$containerStyle = sprintf('width:%s;height:%s;%s', $width, $height, $customStyle);
+?>
+
+<div class="greenview-viewer-container <?= $block->escapeHtmlAttr($customClass) ?>" style="<?= $block->escapeHtmlAttr($containerStyle) ?>">
+    <cds-splat
+        src="<?= $block->escapeUrl($fileUrl) ?>"
+        <?php if ($animate): ?>animate<?php endif; ?>
+        <?php if ($thumbnailUrl): ?>thumbnail="<?= $block->escapeUrl($thumbnailUrl) ?>"<?php endif; ?>
+        <?php if ($position): ?>position="<?= $block->escapeHtmlAttr($position) ?>"<?php endif; ?>
+        <?php if ($scale): ?>scale="<?= $block->escapeHtmlAttr($scale) ?>"<?php endif; ?>
+        <?php if ($initialCameraPosition): ?>initial-camera-position="<?= $block->escapeHtmlAttr($initialCameraPosition) ?>"<?php endif; ?>
+        <?php if (!$useObserver): ?>use-observer="false"<?php endif; ?>
+    ></cds-splat>
+</div>

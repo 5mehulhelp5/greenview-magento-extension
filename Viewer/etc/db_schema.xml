@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Database Schema Declaration
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!-- Splats Table -->
+    <table name="greenview_splats" resource="default" engine="innodb" comment="GreenView Splats">
+        <column xsi:type="varchar" name="id" length="36" nullable="false" comment="Splat ID (UUID from API)"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Splat Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Splat Description"/>
+        <column xsi:type="varchar" name="slug" length="255" nullable="true" comment="Splat Slug"/>
+        <column xsi:type="varchar" name="file_type" length="20" nullable="true" comment="File Type (splat, ply, gltf, glb)"/>
+        <column xsi:type="text" name="file_url" nullable="true" comment="File URL"/>
+        <column xsi:type="text" name="file_ar_url" nullable="true" comment="AR File URL"/>
+        <column xsi:type="text" name="thumbnail_url" nullable="true" comment="Thumbnail URL"/>
+        <column xsi:type="text" name="ar_short_link" nullable="true" comment="AR Short Link"/>
+        <column xsi:type="text" name="viewer_short_link" nullable="true" comment="Viewer Short Link"/>
+        <column xsi:type="smallint" name="ar_enabled" default="1" nullable="false" comment="AR Enabled"/>
+        <column xsi:type="text" name="plugin_config" nullable="true" comment="Plugin Configuration (JSON)"/>
+        <column xsi:type="timestamp" name="created_at" nullable="true" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="true" comment="Updated At"/>
+        <column xsi:type="text" name="data_json" nullable="true" comment="Full Data JSON"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="GREENVIEW_SPLATS_SLUG" indexType="btree">
+            <column name="slug"/>
+        </index>
+        <index referenceId="GREENVIEW_SPLATS_NAME" indexType="btree">
+            <column name="name"/>
+        </index>
+    </table>
+
+    <!-- API Error Logs Table -->
+    <table name="greenview_api_logs" resource="default" engine="innodb" comment="GreenView API Error Logs">
+        <column xsi:type="int" name="log_id" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
+        <column xsi:type="timestamp" name="timestamp" nullable="false" default="CURRENT_TIMESTAMP" comment="Timestamp"/>
+        <column xsi:type="varchar" name="operation" length="100" nullable="false" comment="Operation"/>
+        <column xsi:type="text" name="url" nullable="false" comment="API URL"/>
+        <column xsi:type="text" name="request_headers" nullable="true" comment="Request Headers (JSON)"/>
+        <column xsi:type="int" name="request_timeout" nullable="true" comment="Request Timeout"/>
+        <column xsi:type="text" name="error_message" nullable="false" comment="Error Message"/>
+        <column xsi:type="int" name="response_code" nullable="true" comment="Response Code"/>
+        <column xsi:type="text" name="response_body_preview" nullable="true" comment="Response Body Preview"/>
+        <column xsi:type="varchar" name="user_ip" length="45" nullable="true" comment="User IP"/>
+        <column xsi:type="varchar" name="user_agent" length="255" nullable="true" comment="User Agent"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="GREENVIEW_API_LOGS_TIMESTAMP" indexType="btree">
+            <column name="timestamp"/>
+        </index>
+        <index referenceId="GREENVIEW_API_LOGS_OPERATION" indexType="btree">
+            <column name="operation"/>
+        </index>
+    </table>
+
+</schema>

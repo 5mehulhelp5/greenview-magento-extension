@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Default Configuration Values
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <greenview_viewer>
+            <general>
+                <enabled>1</enabled>
+                <sandbox_mode>0</sandbox_mode>
+            </general>
+            <cache>
+                <cache_lifetime>86400</cache_lifetime>
+            </cache>
+        </greenview_viewer>
+    </default>
+</config>

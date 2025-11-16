@@ -1,0 +1,95 @@
+<?php
+/**
+ * AR Button Template
+ *
+ * @var $block \GreenView\Viewer\Block\ArButton
+ */
+
+if (!$block->isArEnabled()): ?>
+    <div class="greenview-error">
+        <p><?= __('AR functionality not available for this splat.') ?></p>
+    </div>
+<?php return; endif;
+
+$arLink = $block->getArShortLink();
+$qrUrl = $block->getQrCodeUrl();
+$isMobile = $block->isMobile();
+$text = $block->getButtonText();
+$bgColor = $block->getBgColor();
+$borderColor = $block->getBorderColor();
+$textColor = $block->getTextColor();
+$width = $block->getButtonWidth();
+$customClass = $block->getCustomClass();
+$customStyle = $block->getCustomStyle();
+
+$buttonStyle = sprintf(
+    'min-width:auto;width:%s;margin:auto;max-width:%s;border-color:%s;color:%s;%s',
+    $width,
+    $width,
+    $borderColor,
+    $textColor,
+    $customStyle
+);
+?>
+
+<a href="<?= $isMobile ? $block->escapeUrl($arLink) : '#' ?>"
+   class="greenview-ar-button flex cursor-pointer items-center gap-2 rounded-full border bg-transparent py-1 px-1 font-bold <?= $block->escapeHtmlAttr($customClass) ?>"
+   <?php if (!$isMobile): ?>
+       data-qr-url="<?= $block->escapeUrl($qrUrl) ?>"
+       data-ar-link="<?= $block->escapeUrl($arLink) ?>"
+   <?php endif; ?>
+   style="<?= $block->escapeHtmlAttr($buttonStyle) ?>">
+
+    <button class="flex flex-row items-center group justify-end gap-x-4 w-auto mx-auto"
+            aria-label="<?= $block->escapeHtmlAttr($text) ?>">
+
+        <span class="transition-transform duration-300 ease-out translate-x-0 text-center group-hover:translate-x-[50px]">
+            <?= $block->escapeHtml($text) ?>
+        </span>
+
+        <div class="transition-transform duration-300 ease-out flex items-center justify-center h-10 w-10 rounded-full group-hover:-translate-x-[143px] translate-x-[40px]"
+             style="background-color:<?= $block->escapeHtmlAttr($bgColor) ?>">
+            <svg class="-rotate-90" fill="#fff" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 52 52">
+                <path d="M9.6 31c-.8.8-.8 1.9 0 2.7l15 14.7c.8.8 2 .8 2.8 0l15.1-14.7c.8-.8.8-1.9 0-2.7l-2.8-2.7c-.8-.8-2-.8-2.8 0l-4.7 4.6c-.8.8-2.2.3-2.2-.9V5c0-1-.9-2-2-2h-4c-1.1 0-2 1.1-2 2v27c0 1.2-1.4 1.7-2.2.9l-4.7-4.6c-.8-.8-2-.8-2.8 0z"></path>
+            </svg>
+        </div>
+    </button>
+</a>
+
+<?php if (!$isMobile): ?>
+<script type="text/javascript">
+require(['jquery'], function($) {
+    $(document).ready(function() {
+        $('.greenview-ar-button[data-qr-url]').on('click', function(e) {
+            e.preventDefault();
+            var qrUrl = $(this).data('qr-url');
+            var arLink = $(this).data('ar-link');
+
+            // Show QR modal (you can customize this)
+            var modal = $('<div class="greenview-qr-modal">' +
+                '<div class="modal-content">' +
+                '<span class="close">&times;</span>' +
+                '<h2><?= __('Scan QR Code for AR Experience') ?></h2>' +
+                '<img src="' + qrUrl + '" alt="QR Code" style="max-width:300px;"/>' +
+                '<p><?= __('Scan this QR code with your mobile device') ?></p>' +
+                '<p><a href="' + arLink + '" target="_blank"><?= __('Or click here to open') ?></a></p>' +
+                '</div>' +
+                '</div>');
+
+            $('body').append(modal);
+            modal.fadeIn();
+
+            modal.find('.close, .greenview-qr-modal').on('click', function() {
+                modal.fadeOut(function() {
+                    $(this).remove();
+                });
+            });
+
+            modal.find('.modal-content').on('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    });
+});
+</script>
+<?php endif; ?>
