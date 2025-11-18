@@ -133,8 +133,11 @@
 
     <!-- How to Use Section -->
     <div class="welcome-section usage-section">
-        <h2><i class="fas fa-book"></i> How to Use This Extension</h2>
-        <div class="usage-steps">
+        <h2 class="collapsible-header" onclick="toggleCollapse('usage-content')">
+            <i class="fas fa-book"></i> How to Use This Extension
+            <i class="fas fa-chevron-down collapse-icon" id="usage-content-icon"></i>
+        </h2>
+        <div class="usage-steps collapsible-content" id="usage-content" style="display: none;">
             <div class="step">
                 <div class="step-number">1</div>
                 <div class="step-content">
@@ -163,7 +166,11 @@
                     <p>There are two ways to display the 3D viewer and AR button in your store:</p>
 
                     <div class="implementation-method">
-                        <h4><i class="fas fa-file-alt"></i> Method 1: Using Widgets (Easiest - No Coding Required)</h4>
+                        <h4 class="method-header" onclick="toggleCollapse('method1-content')">
+                            <i class="fas fa-file-alt"></i> Method 1: Using Widgets (Easiest - No Coding Required)
+                            <i class="fas fa-chevron-down collapse-icon" id="method1-content-icon"></i>
+                        </h4>
+                        <div class="method-content collapsible-content" id="method1-content" style="display: none;">
 
                         <div class="sub-step">
                             <strong>A. Add to CMS Pages:</strong>
@@ -311,10 +318,15 @@
                                 <strong><i class="fas fa-check-circle"></i> Recommendation:</strong> For the best customer experience, use <strong>3D Product Mode</strong> for products where 3D visualization is the primary selling point (furniture, electronics, vehicles). The large, immersive viewer creates a premium feel and increases engagement.
                             </div>
                         </div>
+                        </div>
                     </div>
 
                     <div class="implementation-method">
-                        <h4><i class="fas fa-laptop-code"></i> Method 2: Using Layout XML (For Developers)</h4>
+                        <h4 class="method-header" onclick="toggleCollapse('method2-content')">
+                            <i class="fas fa-laptop-code"></i> Method 2: Using Layout XML (For Developers)
+                            <i class="fas fa-chevron-down collapse-icon" id="method2-content-icon"></i>
+                        </h4>
+                        <div class="method-content collapsible-content" id="method2-content" style="display: none;">
 
                         <div class="code-example">
                             <strong>Add to any layout XML file (e.g., cms_page_view.xml or catalog_product_view.xml):</strong>
@@ -455,6 +467,8 @@
                             or review the extension logs in <code>var/log/system.log</code> and <code>var/log/exception.log</code>.
                         </div>
                     </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="step">
@@ -465,8 +479,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
     <!-- Quick Actions Section -->
     <div class="welcome-section actions-section">
         <h2><i class="fas fa-rocket"></i> Quick Actions</h2>
@@ -511,6 +523,7 @@
             </div>
         </div>
     </div>
+    </div>
 
     <!-- Footer -->
     <div class="welcome-footer">
@@ -522,3 +535,20 @@
         </p>
     </div>
 </div>
+
+<script>
+function toggleCollapse(contentId) {
+    var content = document.getElementById(contentId);
+    var icon = document.getElementById(contentId + '-icon');
+
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+    } else {
+        content.style.display = 'none';
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+    }
+}
+</script>

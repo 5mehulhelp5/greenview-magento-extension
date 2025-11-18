@@ -45,7 +45,7 @@ class Index extends Action
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('GreenView_Viewer::welcome');
-        $resultPage->getConfig()->getTitle()->prepend(__('Welcome to GreenView 3D Viewer'));
+        $resultPage->getConfig()->getTitle()->prepend(__(''));
 
         return $resultPage;
     }

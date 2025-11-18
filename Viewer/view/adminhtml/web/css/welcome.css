@@ -540,6 +540,56 @@
     text-decoration: underline;
 }
 
+/* Collapsible Sections */
+.collapsible-header {
+    cursor: pointer;
+    position: relative;
+    padding-right: 40px;
+    transition: color 0.3s ease;
+    user-select: none;
+}
+
+.collapsible-header:hover {
+    color: #7eaf91;
+}
+
+.collapse-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+    font-size: 18px;
+}
+
+.method-header {
+    cursor: pointer;
+    position: relative;
+    padding-right: 40px;
+    transition: color 0.3s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.method-header:hover {
+    color: #7eaf91;
+}
+
+.method-header .collapse-icon {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin-left: auto;
+}
+
+.collapsible-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .greenview-welcome-page {
