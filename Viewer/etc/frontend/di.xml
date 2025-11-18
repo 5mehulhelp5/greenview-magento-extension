@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Frontend Dependency Injection Configuration
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Plugin to hide product gallery when 3D Product mode is enabled -->
+    <type name="Magento\Catalog\Block\Product\View\Gallery">
+        <plugin name="greenview_hide_gallery"
+                type="GreenView\Viewer\Plugin\HideProductGallery"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+</config>

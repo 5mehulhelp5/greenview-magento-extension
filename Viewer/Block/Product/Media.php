@@ -1,6 +1,6 @@
 <?php
 /**
- * Product View Block for 3D Viewer
+ * Product Media Gallery Replacement Block
  *
  * @category   GreenView
  * @package    GreenView_Viewer
@@ -15,7 +15,7 @@ use Magento\Framework\Registry;
 use GreenView\Viewer\Helper\Data as GreenViewHelper;
 use GreenView\Viewer\Service\SplatManager;
 
-class View extends Template
+class Media extends Template
 {
     /**
      * @var Registry
@@ -31,6 +31,11 @@ class View extends Template
      * @var SplatManager
      */
     protected $splatManager;
+
+    /**
+     * @var string
+     */
+    protected $_template = 'GreenView_Viewer::product/media.phtml';
 
     /**
      * @param Template\Context $context
@@ -63,33 +68,18 @@ class View extends Template
     }
 
     /**
-     * Check if 3D viewer is enabled for this product
+     * Check if 3D product mode is enabled (replaces images)
      *
      * @return bool
      */
-    public function is3DEnabled()
+    public function is3DProductEnabled()
     {
         $product = $this->getProduct();
         if (!$product) {
             return false;
         }
 
-        return (bool)$product->getData('greenview_enable_3d');
-    }
-
-    /**
-     * Check if AR button is enabled for this product
-     *
-     * @return bool
-     */
-    public function isAREnabled()
-    {
-        $product = $this->getProduct();
-        if (!$product) {
-            return false;
-        }
-
-        return (bool)$product->getData('greenview_enable_ar');
+        return (bool)$product->getData('greenview_enable_3d_product');
     }
 
     /**
@@ -123,21 +113,6 @@ class View extends Template
     }
 
     /**
-     * Get splat data
-     *
-     * @return array|null
-     */
-    public function getSplatData()
-    {
-        $splat = $this->getSplat();
-        if (!$splat) {
-            return null;
-        }
-
-        return $splat->getDataJsonArray();
-    }
-
-    /**
      * Get file URL for the splat
      *
      * @return string|null
@@ -150,6 +125,21 @@ class View extends Template
         }
 
         return $splat->getData('file_url');
+    }
+
+    /**
+     * Get thumbnail URL for the splat
+     *
+     * @return string|null
+     */
+    public function getThumbnailUrl()
+    {
+        $splat = $this->getSplat();
+        if (!$splat) {
+            return null;
+        }
+
+        return $splat->getData('thumbnail_url');
     }
 
     /**
@@ -190,12 +180,15 @@ class View extends Template
     }
 
     /**
-     * Check if any GreenView feature is enabled
+     * Check if should show 3D viewer in media gallery
      *
      * @return bool
      */
-    public function shouldDisplay()
+    public function shouldReplace()
     {
-        return ($this->is3DEnabled() || $this->isAREnabled()) && $this->getSplatSlug();
+        return $this->isGreenViewEnabled()
+            && $this->is3DProductEnabled()
+            && $this->getSplatSlug()
+            && $this->getFileUrl();
     }
 }

@@ -79,6 +79,16 @@ class ArButton extends Template
      */
     public function isArEnabled()
     {
+        // Check if we can generate AR link
+        $token = $this->helper->getCompanyToken();
+        $slug = $this->getData('slug');
+
+        if ($token && $slug) {
+            // We can generate AR link with new format
+            return true;
+        }
+
+        // Fallback to checking API data
         $splatData = $this->getSplatData();
         if (!$splatData) {
             return false;
@@ -91,14 +101,23 @@ class ArButton extends Template
     }
 
     /**
-     * Get AR short link
+     * Get AR short link (legacy - now generates new format)
      *
      * @return string
      */
     public function getArShortLink()
     {
-        $splatData = $this->getSplatData();
-        return $splatData['arShortLink'] ?? '';
+        // Use new URL format: https://dashboard.green-view.nl/ar/{company_token}/{slug}
+        $token = $this->helper->getCompanyToken();
+        $slug = $this->getData('slug');
+
+        if (!$token || !$slug) {
+            // Fallback to API data if available
+            $splatData = $this->getSplatData();
+            return $splatData['arShortLink'] ?? '';
+        }
+
+        return 'https://dashboard.green-view.nl/ar/' . $token . '/' . $slug;
     }
 
     /**
@@ -109,7 +128,7 @@ class ArButton extends Template
     public function getQrCodeUrl()
     {
         $arLink = $this->getArShortLink();
-        return 'https://qr.green-view.nl/generate-qr?content=' . urlencode($arLink) . '&size=512&fg_color=%23000&bg_color=%23FFFFFF';
+        return 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($arLink);
     }
 
     /**

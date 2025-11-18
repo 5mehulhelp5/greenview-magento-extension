@@ -9,7 +9,15 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <!-- Add 3D Viewer and AR Button after product description -->
+        <!-- Replace Product Image Gallery with 3D Viewer (when enabled) -->
+        <referenceContainer name="product.info.media">
+            <block class="GreenView\Viewer\Block\Product\Media"
+                   name="greenview.product.media"
+                   template="GreenView_Viewer::product/media.phtml"
+                   before="-"/>
+        </referenceContainer>
+
+        <!-- Add 3D Viewer and AR Button after product description (legacy position) -->
         <referenceContainer name="product.info.main">
             <block class="GreenView\Viewer\Block\Product\View"
                    name="greenview.product.viewer"

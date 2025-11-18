@@ -44,8 +44,12 @@ echo "<!-- DEBUG: Splat Data: " . ($splatData ? json_encode($splatData) : 'NULL'
     <?php if ($block->isAREnabled() && $slug): ?>
         <div class="greenview-ar-button-wrapper" style="margin-top: 20px; text-align: center;">
             <?php
-            // AR Button inline rendering
-            $arUrl = 'https://green-view.nl/app/viewer/' . $block->escapeHtmlAttr($slug);
+            // AR Button inline rendering - Updated URL format
+            $arUrl = $block->getArUrl();
+            if (!$arUrl) {
+                // Fallback if token is missing
+                $arUrl = 'https://dashboard.green-view.nl/ar/' . $block->escapeHtmlAttr($slug);
+            }
             $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($arUrl);
             $isMobile = preg_match('/(android|iphone|ipad)/i', $_SERVER['HTTP_USER_AGENT'] ?? '');
             ?>

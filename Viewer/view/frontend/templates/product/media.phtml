@@ -1,0 +1,177 @@
+<?php
+/**
+ * Product Media Gallery - 3D Viewer Replacement Template
+ *
+ * @var $block \GreenView\Viewer\Block\Product\Media
+ */
+
+// Only show if 3D product mode is enabled
+if (!$block->shouldReplace()) {
+    return;
+}
+
+$fileUrl = $block->getFileUrl();
+$thumbnailUrl = $block->getThumbnailUrl();
+$product = $block->getProduct();
+$productName = $product ? $product->getName() : '';
+?>
+
+<div class="greenview-product-media" style="width: 100%; margin-bottom: 20px;">
+    <!-- 3D Viewer as Main Product Image -->
+    <div class="greenview-3d-main-viewer" style="position: relative; background: #f9fafb; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
+        <!-- 3D Viewer (No placeholder image) -->
+        <cds-splat
+            src="<?= $block->escapeUrl($fileUrl) ?>"
+            style="width: 100%; height: 600px; display: block; background: #f9fafb;"
+            animate="false">
+        </cds-splat>
+        <!-- Controls Info -->
+        <div style="position: absolute; bottom: 15px; right: 15px; background: rgba(255, 255, 255, 0.95); padding: 10px 15px; border-radius: 6px; font-size: 12px; color: #666; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <div style="margin-bottom: 3px;"><strong>Drag</strong> to rotate</div>
+            <div><strong>Scroll</strong> to zoom</div>
+        </div>
+    </div>
+
+    <!-- AR Button Below Viewer -->
+    <div style="margin-top: 15px; text-align: center;">
+        <?php
+        // AR Button - Updated URL format
+        $slug = $block->getSplatSlug();
+        $arUrl = $block->getArUrl();
+        if (!$arUrl) {
+            // Fallback if token is missing
+            $arUrl = 'https://dashboard.green-view.nl/ar/' . $block->escapeHtmlAttr($slug);
+        }
+        $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($arUrl);
+        $isMobile = preg_match('/(android|iphone|ipad)/i', $_SERVER['HTTP_USER_AGENT'] ?? '');
+        ?>
+
+        <button
+            onclick="<?= $isMobile ? "window.location.href='" . $block->escapeJs($arUrl) . "'" : "document.getElementById('greenview-qr-modal-media-" . $block->escapeHtmlAttr($slug) . "').style.display='flex'" ?>"
+            style="background: #667eea; color: #ffffff; border: 2px solid #667eea; padding: 14px 35px; font-size: 16px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);"
+            onmouseover="this.style.background='#5568d3'; this.style.boxShadow='0 6px 16px rgba(102, 126, 234, 0.4)'; this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.background='#667eea'; this.style.boxShadow='0 4px 12px rgba(102, 126, 234, 0.3)'; this.style.transform='translateY(0)'">
+            📱 View in Your Space (AR)
+        </button>
+
+        <?php if (!$isMobile): ?>
+        <div id="greenview-qr-modal-media-<?= $block->escapeHtmlAttr($slug) ?>"
+             style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center;"
+             onclick="this.style.display='none'">
+            <div style="background: white; padding: 40px; border-radius: 16px; text-align: center; max-width: 450px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" onclick="event.stopPropagation()">
+                <h3 style="margin: 0 0 20px 0; font-size: 24px; color: #333; font-weight: 700;">View in Augmented Reality</h3>
+                <p style="margin: 0 0 25px 0; color: #666; font-size: 15px; line-height: 1.5;">Scan this QR code with your phone to see this product in your space</p>
+                <img src="<?= $block->escapeUrl($qrUrl) ?>" alt="QR Code for AR" style="max-width: 100%; height: auto; border-radius: 12px; border: 4px solid #f3f4f6;"/>
+                <p style="margin: 25px 0 15px; color: #666; font-size: 14px;">
+                    📱 Open your phone camera and point at the QR code
+                </p>
+                <button onclick="document.getElementById('greenview-qr-modal-media-<?= $block->escapeHtmlAttr($slug) ?>').style.display='none'"
+                        style="margin-top: 10px; padding: 12px 30px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);">
+                    Close
+                </button>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <p style="font-size: 13px; color: #666; margin-top: 12px;">
+            Experience this product in augmented reality
+        </p>
+    </div>
+
+    <!-- Fallback Message -->
+    <div style="margin-top: 20px; padding: 15px; background: #f0f9ff; border-left: 4px solid #0284c7; border-radius: 6px; font-size: 13px; color: #0c4a6e;">
+        <strong>💡 Interactive 3D Model:</strong> This product uses 3D technology instead of photos. Rotate, zoom, and explore every detail from any angle.
+    </div>
+</div>
+
+<!-- Hide original product gallery - CSS approach for reliability -->
+<style>
+    /* Hide ALL standard product image elements when GreenView 3D Product is active */
+    .greenview-product-media ~ .product-image-container,
+    .greenview-product-media ~ .fotorama,
+    .greenview-product-media ~ .gallery-placeholder,
+    .greenview-product-media ~ [data-gallery-role="gallery-placeholder"],
+    body .product.media .fotorama,
+    body .product.media .product-image-container,
+    body .product.media .gallery-placeholder,
+    body .product.media [data-gallery-role="gallery-placeholder"],
+    body .product-image-wrapper,
+    body .product-image-photo {
+        display: none !important;
+    }
+
+    /* Ensure greenview media is visible */
+    .greenview-product-media {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Hide the fotorama gallery completely when 3D product is active */
+    .product.media:has(.greenview-product-media) .fotorama,
+    .product.media:has(.greenview-product-media) .gallery-placeholder {
+        display: none !important;
+    }
+</style>
+
+<script>
+    (function() {
+        // Additional JavaScript to ensure gallery is hidden (backup to CSS)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find all image-related elements and hide them
+            var selectors = [
+                '.fotorama',
+                '.gallery-placeholder',
+                '[data-gallery-role="gallery-placeholder"]',
+                '.product-image-container',
+                '.product-image-wrapper'
+            ];
+
+            selectors.forEach(function(selector) {
+                var elements = document.querySelectorAll(selector);
+                elements.forEach(function(el) {
+                    // Only hide if it's not inside greenview-product-media
+                    if (!el.closest('.greenview-product-media')) {
+                        el.style.display = 'none';
+                        el.style.visibility = 'hidden';
+                        el.style.opacity = '0';
+                        el.style.height = '0';
+                        el.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            // Also hide any img tags in the media container (except in greenview)
+            var mediaContainer = document.querySelector('.product.media');
+            if (mediaContainer) {
+                var images = mediaContainer.querySelectorAll('img');
+                images.forEach(function(img) {
+                    if (!img.closest('.greenview-product-media')) {
+                        img.style.display = 'none';
+                    }
+                });
+            }
+        });
+    })();
+</script>
+
+<style>
+/* Ensure 3D viewer is responsive */
+@media (max-width: 768px) {
+    .greenview-3d-main-viewer cds-splat {
+        height: 400px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .greenview-3d-main-viewer cds-splat {
+        height: 300px !important;
+    }
+}
+
+/* Hide controls info on small screens */
+@media (max-width: 640px) {
+    .greenview-3d-main-viewer > div:last-of-type {
+        display: none;
+    }
+}
+</style>
