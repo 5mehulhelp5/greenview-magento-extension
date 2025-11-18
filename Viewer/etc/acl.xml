@@ -13,6 +13,7 @@
             <resource id="Magento_Backend::admin">
                 <resource id="GreenView_Viewer::greenview" title="GreenView" sortOrder="70">
                     <resource id="GreenView_Viewer::welcome" title="Welcome" sortOrder="5"/>
+                    <resource id="GreenView_Viewer::builder" title="Shortcode Builder" sortOrder="8"/>
                     <resource id="GreenView_Viewer::splats" title="Manage Splats" sortOrder="10"/>
                     <resource id="GreenView_Viewer::sync" title="Sync Splats" sortOrder="20"/>
                     <resource id="GreenView_Viewer::logs" title="API Logs" sortOrder="30"/>

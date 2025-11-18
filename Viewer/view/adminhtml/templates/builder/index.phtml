@@ -1,0 +1,525 @@
+<?php
+/**
+ * Shortcode Builder Template
+ *
+ * @var $block \GreenView\Viewer\Block\Adminhtml\Builder\Index
+ */
+
+$splats = $block->getSplats();
+
+// Build splat data array for JavaScript
+$splatData = [];
+foreach ($splats as $splat) {
+    $splatData[$splat->getSlug()] = [
+        'slug' => $splat->getSlug(),
+        'name' => $splat->getName(),
+        'file_url' => $splat->getData('file_url')
+    ];
+}
+?>
+
+<!-- Load 3D Viewer Script -->
+<script src="<?= $block->escapeUrl($block->getViewFileUrl('GreenView_Viewer::js/cds-splat.iife.js')) ?>"></script>
+
+<script>
+// Splat data for preview
+var splatData = <?= json_encode($splatData) ?>;
+</script>
+
+<div class="greenview-builder-page">
+    <!-- Header -->
+    <div class="builder-header">
+        <h1 style="color: white"><i class="fas fa-code"></i> Shortcode Builder</h1>
+        <p>Generate shortcodes for 3D Viewer and AR Button widgets</p>
+    </div>
+
+    <?php if (!$block->isEnabled()): ?>
+        <div class="message message-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            GreenView extension is currently disabled. Please enable it in
+            <a href="<?= $block->escapeUrl($block->getUrl('adminhtml/system_config/edit/section/greenview_viewer')) ?>">Settings</a>
+            to use the Shortcode Builder.
+        </div>
+    <?php elseif ($splats->getSize() == 0): ?>
+        <div class="message message-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            No 3D models found. Please
+            <a href="<?= $block->escapeUrl($block->getUrl('greenview/sync/index')) ?>">sync your splats</a>
+            first.
+        </div>
+    <?php endif; ?>
+
+    <div class="builder-container">
+        <!-- Left Panel: Configuration -->
+        <div class="builder-left">
+            <!-- Shortcode Configurator -->
+            <div class="builder-section">
+                <h2><i class="fas fa-sliders-h"></i> Shortcode Configurator</h2>
+
+                <div class="form-group">
+                    <label for="element-type">
+                        <i class="fas fa-cube"></i> Element Type
+                    </label>
+                    <select id="element-type" class="form-control">
+                        <option value="viewer">3D Viewer</option>
+                        <option value="ar-button">AR Button</option>
+                    </select>
+                    <p class="field-note">Choose which element to generate</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="splat-slug">
+                        <i class="fas fa-tag"></i> 3D Model Slug <span class="required">*</span>
+                    </label>
+                    <select id="splat-slug" class="form-control" required>
+                        <option value="">-- Select a 3D Model --</option>
+                        <?php foreach ($splats as $splat): ?>
+                            <option value="<?= $block->escapeHtmlAttr($splat->getSlug()) ?>">
+                                <?= $block->escapeHtml($splat->getName()) ?> (<?= $block->escapeHtml($splat->getSlug()) ?>)
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <p class="field-note">Select the 3D model to display</p>
+                </div>
+            </div>
+
+            <!-- Viewer Settings -->
+            <div class="builder-section viewer-settings">
+                <h2><i class="fas fa-cog"></i> Viewer Settings</h2>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="viewer-width">
+                            <i class="fas fa-arrows-alt-h"></i> Width
+                        </label>
+                        <input type="text" id="viewer-width" class="form-control" value="100%" placeholder="e.g., 100%, 800px">
+                        <p class="field-note">Width in px or %</p>
+                    </div>
+                    <div class="form-group half">
+                        <label for="viewer-height">
+                            <i class="fas fa-arrows-alt-v"></i> Height
+                        </label>
+                        <input type="text" id="viewer-height" class="form-control" value="600px" placeholder="e.g., 600px, 50vh">
+                        <p class="field-note">Height in px, vh, or %</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="enable-animation" class="toggle-checkbox">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-text">
+                            <i class="fas fa-play-circle"></i> Enable Animation
+                        </span>
+                    </label>
+                    <p class="field-note">Start 3D model with auto-rotation animation</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="performance-mode" class="toggle-checkbox">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-text">
+                            <i class="fas fa-tachometer-alt"></i> Performance Mode
+                        </span>
+                    </label>
+                    <p class="field-note">Load viewer only when visible (lazy loading)</p>
+                </div>
+            </div>
+
+            <!-- Advanced 3D Settings -->
+            <div class="builder-section advanced-settings collapsible">
+                <h2 class="collapsible-trigger" onclick="toggleSection('advanced-settings')">
+                    <i class="fas fa-cogs"></i> Advanced 3D Settings
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </h2>
+                <div class="collapsible-content" id="advanced-settings" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group third">
+                            <label for="position-x">Position X</label>
+                            <input type="number" id="position-x" class="form-control" value="0" step="0.1">
+                        </div>
+                        <div class="form-group third">
+                            <label for="position-y">Position Y</label>
+                            <input type="number" id="position-y" class="form-control" value="0" step="0.1">
+                        </div>
+                        <div class="form-group third">
+                            <label for="position-z">Position Z</label>
+                            <input type="number" id="position-z" class="form-control" value="0" step="0.1">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group third">
+                            <label for="scale-x">Scale X</label>
+                            <input type="number" id="scale-x" class="form-control" value="1" step="0.1" min="0.1">
+                        </div>
+                        <div class="form-group third">
+                            <label for="scale-y">Scale Y</label>
+                            <input type="number" id="scale-y" class="form-control" value="1" step="0.1" min="0.1">
+                        </div>
+                        <div class="form-group third">
+                            <label for="scale-z">Scale Z</label>
+                            <input type="number" id="scale-z" class="form-control" value="1" step="0.1" min="0.1">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group third">
+                            <label for="camera-x">Camera X</label>
+                            <input type="number" id="camera-x" class="form-control" value="-10" step="0.1">
+                        </div>
+                        <div class="form-group third">
+                            <label for="camera-y">Camera Y</label>
+                            <input type="number" id="camera-y" class="form-control" value="-3" step="0.1">
+                        </div>
+                        <div class="form-group third">
+                            <label for="camera-z">Camera Z</label>
+                            <input type="number" id="camera-z" class="form-control" value="-4" step="0.1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Styling Options -->
+            <div class="builder-section">
+                <h2><i class="fas fa-palette"></i> Styling Options</h2>
+
+                <div class="form-group">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="add-border" class="toggle-checkbox">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-text">
+                            <i class="fas fa-border-style"></i> Add Border
+                        </span>
+                    </label>
+                    <p class="field-note">Add border around the viewer</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="custom-class">
+                        <i class="fas fa-css3-alt"></i> Custom CSS Class
+                    </label>
+                    <input type="text" id="custom-class" class="form-control" placeholder="e.g., my-custom-viewer">
+                    <p class="field-note">Optional custom CSS class for additional styling</p>
+                </div>
+            </div>
+
+            <!-- Apply Button -->
+            <div class="builder-actions">
+                <button onclick="generateShortcode()" class="btn-primary">
+                    <i class="fas fa-magic"></i> Generate Shortcode
+                </button>
+                <button onclick="resetBuilder()" class="btn-secondary">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Panel: Preview & Output -->
+        <div class="builder-right">
+            <!-- Preview Section -->
+            <div class="builder-section preview-section">
+                <h2><i class="fas fa-eye"></i> Preview</h2>
+                <div id="preview-container" class="preview-container">
+                    <div class="preview-placeholder">
+                        <i class="fas fa-cube"></i>
+                        <p>Select a 3D model and click "Generate Shortcode" to see preview</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generated Shortcode -->
+            <div class="builder-section shortcode-output">
+                <h2><i class="fas fa-code"></i> Generated Shortcode</h2>
+                <div class="shortcode-display">
+                    <pre id="generated-shortcode" class="shortcode-pre">{{widget type="GreenView\Viewer\Block\Widget\Viewer" slug="example" width="100%" height="600px" animate="0"}}</pre>
+                    <button onclick="copyShortcode()" class="btn-copy" title="Copy to clipboard">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <p class="usage-note">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>How to use:</strong> Copy this shortcode and paste it into any CMS page content or block in the Page Builder.
+                </p>
+            </div>
+
+            <!-- Quick Help -->
+            <div class="builder-section help-section">
+                <h2><i class="fas fa-question-circle"></i> Quick Help</h2>
+                <div class="help-content">
+                    <div class="help-item">
+                        <i class="fas fa-check-circle" style="color: #7eaf91;"></i>
+                        <div>
+                            <strong>3D Viewer</strong>
+                            <p>Displays an interactive 3D model that users can rotate and zoom</p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <i class="fas fa-check-circle" style="color: #7eaf91;"></i>
+                        <div>
+                            <strong>AR Button</strong>
+                            <p>Shows a button for viewing the model in Augmented Reality</p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <i class="fas fa-check-circle" style="color: #7eaf91;"></i>
+                        <div>
+                            <strong>Widget Format</strong>
+                            <p>Use the Magento widget syntax: <code>{{widget type="..." ...}}</code></p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <i class="fas fa-check-circle" style="color: #7eaf91;"></i>
+                        <div>
+                            <strong>Need Help?</strong>
+                            <p>Visit our <a href="https://green-view.nl/documentation" target="_blank">documentation</a> or <a href="https://green-view.nl/support" target="_blank">contact support</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleSection(sectionId) {
+    var content = document.getElementById(sectionId);
+    var trigger = content.previousElementSibling;
+    var icon = trigger.querySelector('.toggle-icon');
+
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+    } else {
+        content.style.display = 'none';
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+    }
+}
+
+function generateShortcode() {
+    var elementType = document.getElementById('element-type').value;
+    var slug = document.getElementById('splat-slug').value;
+
+    if (!slug) {
+        alert('Please select a 3D model first!');
+        return;
+    }
+
+    var shortcode = '';
+
+    if (elementType === 'viewer') {
+        var width = document.getElementById('viewer-width').value || '100%';
+        var height = document.getElementById('viewer-height').value || '600px';
+        var animate = document.getElementById('enable-animation').checked ? '1' : '0';
+        var performanceMode = document.getElementById('performance-mode').checked ? '1' : '0';
+        var customClass = document.getElementById('custom-class').value;
+        var addBorder = document.getElementById('add-border').checked;
+
+        // Build widget shortcode
+        shortcode = '{{widget type="GreenView\\Viewer\\Block\\Widget\\Viewer"';
+        shortcode += ' slug="' + slug + '"';
+        shortcode += ' width="' + width + '"';
+        shortcode += ' height="' + height + '"';
+        shortcode += ' animate="' + animate + '"';
+
+        if (performanceMode === '1') {
+            shortcode += ' lazy="1"';
+        }
+
+        if (customClass) {
+            shortcode += ' class="' + customClass + '"';
+        }
+
+        if (addBorder) {
+            shortcode += ' border="1"';
+        }
+
+        // Advanced settings (only if not default)
+        var posX = document.getElementById('position-x').value;
+        var posY = document.getElementById('position-y').value;
+        var posZ = document.getElementById('position-z').value;
+        var scaleX = document.getElementById('scale-x').value;
+        var scaleY = document.getElementById('scale-y').value;
+        var scaleZ = document.getElementById('scale-z').value;
+        var camX = document.getElementById('camera-x').value;
+        var camY = document.getElementById('camera-y').value;
+        var camZ = document.getElementById('camera-z').value;
+
+        if (posX != 0) shortcode += ' position_x="' + posX + '"';
+        if (posY != 0) shortcode += ' position_y="' + posY + '"';
+        if (posZ != 0) shortcode += ' position_z="' + posZ + '"';
+        if (scaleX != 1) shortcode += ' scale_x="' + scaleX + '"';
+        if (scaleY != 1) shortcode += ' scale_y="' + scaleY + '"';
+        if (scaleZ != 1) shortcode += ' scale_z="' + scaleZ + '"';
+        if (camX != -10) shortcode += ' camera_x="' + camX + '"';
+        if (camY != -3) shortcode += ' camera_y="' + camY + '"';
+        if (camZ != -4) shortcode += ' camera_z="' + camZ + '"';
+
+        shortcode += '}}';
+
+        // Update preview
+        updatePreview(slug, width, height, animate);
+    } else {
+        // AR Button
+        shortcode = '{{widget type="GreenView\\Viewer\\Block\\Widget\\ArButton"';
+        shortcode += ' slug="' + slug + '"';
+        shortcode += ' text="View in AR"';
+        shortcode += '}}';
+
+        // Update preview
+        updateArButtonPreview();
+    }
+
+    document.getElementById('generated-shortcode').textContent = shortcode;
+}
+
+function updatePreview(slug, width, height, animate) {
+    var preview = document.getElementById('preview-container');
+
+    // Check if we have splat data for this slug
+    if (!splatData[slug] || !splatData[slug].file_url) {
+        preview.innerHTML = '<div style="width:' + width + ';height:' + height + ';background:#f9fafb;border-radius:8px;display:flex;align-items:center;justify-content:center;border:2px solid #e5e7eb;">' +
+            '<div style="text-align:center;color:#666;">' +
+            '<i class="fas fa-exclamation-triangle" style="font-size:48px;margin-bottom:15px;color:#f59e0b;"></i>' +
+            '<p style="margin:0;font-size:16px;font-weight:600;">Preview Not Available</p>' +
+            '<p style="margin:5px 0 0;font-size:13px;">Model file URL not found for: ' + slug + '</p>' +
+            '</div></div>';
+        return;
+    }
+
+    var fileUrl = splatData[slug].file_url;
+    var modelName = splatData[slug].name;
+
+    // Create the actual 3D viewer preview
+    preview.innerHTML = '<div style="width:100%;height:auto;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">' +
+        '<div style="width:' + width + ';height:' + height + ';max-width:100%;margin:0 auto;background:#f9fafb;position:relative;">' +
+        '<cds-splat src="' + fileUrl + '" style="width:100%;height:100%;display:block;" animate="' + (animate === '1' ? 'true' : 'false') + '"></cds-splat>' +
+        '<div style="position:absolute;top:10px;left:10px;background:rgba(255,255,255,0.95);padding:8px 12px;border-radius:6px;font-size:12px;color:#38585a;box-shadow:0 2px 6px rgba(0,0,0,0.1);z-index:10;">' +
+        '<strong>Preview:</strong> ' + modelName +
+        '</div>' +
+        '</div>' +
+        '<div style="padding:12px;text-align:center;background:#f9fafb;border-top:1px solid #e5e7eb;">' +
+        '<p style="margin:0;font-size:13px;color:#666;">' +
+        '<i class="fas fa-info-circle" style="color:#38585a;"></i> ' +
+        'Size: ' + width + ' × ' + height + ' | ' +
+        'Animation: ' + (animate === '1' ? '<span style="color:#7eaf91;">Enabled</span>' : '<span style="color:#9ca3af;">Disabled</span>') +
+        '</p>' +
+        '</div>' +
+        '</div>';
+}
+
+function updateArButtonPreview() {
+    var preview = document.getElementById('preview-container');
+    preview.innerHTML = '<div style="padding:40px;background:#f9fafb;border-radius:8px;display:flex;align-items:center;justify-content:center;border:2px solid #e5e7eb;">' +
+        '<button style="background:#38585a;color:#fff;border:2px solid #38585a;padding:12px 30px;font-size:16px;font-weight:600;border-radius:6px;cursor:pointer;box-shadow:0 4px 12px rgba(56,88,90,0.3);">' +
+        '<i class="fas fa-mobile-alt"></i> View in AR' +
+        '</button></div>';
+}
+
+function copyShortcode() {
+    var shortcode = document.getElementById('generated-shortcode').textContent;
+    navigator.clipboard.writeText(shortcode).then(function() {
+        var btn = document.querySelector('.btn-copy');
+        var originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.style.background = '#7eaf91';
+
+        setTimeout(function() {
+            btn.innerHTML = originalHtml;
+            btn.style.background = '';
+        }, 2000);
+    }, function(err) {
+        alert('Failed to copy shortcode. Please copy manually.');
+    });
+}
+
+function resetBuilder() {
+    document.getElementById('element-type').value = 'viewer';
+    document.getElementById('splat-slug').value = '';
+    document.getElementById('viewer-width').value = '100%';
+    document.getElementById('viewer-height').value = '600px';
+    document.getElementById('enable-animation').checked = false;
+    document.getElementById('performance-mode').checked = false;
+    document.getElementById('position-x').value = '0';
+    document.getElementById('position-y').value = '0';
+    document.getElementById('position-z').value = '0';
+    document.getElementById('scale-x').value = '1';
+    document.getElementById('scale-y').value = '1';
+    document.getElementById('scale-z').value = '1';
+    document.getElementById('camera-x').value = '-10';
+    document.getElementById('camera-y').value = '-3';
+    document.getElementById('camera-z').value = '-4';
+    document.getElementById('add-border').checked = false;
+    document.getElementById('custom-class').value = '';
+
+    document.getElementById('preview-container').innerHTML = '<div class="preview-placeholder">' +
+        '<i class="fas fa-cube"></i>' +
+        '<p>Select a 3D model and click "Generate Shortcode" to see preview</p>' +
+        '</div>';
+
+    document.getElementById('generated-shortcode').textContent = '{{widget type="GreenView\\Viewer\\Block\\Widget\\Viewer" slug="example" width="100%" height="600px" animate="0"}}';
+}
+
+// Auto-generate on element type change
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('element-type').addEventListener('change', function() {
+        var viewerSettings = document.querySelector('.viewer-settings');
+        var advancedSettings = document.querySelector('.advanced-settings');
+
+        if (this.value === 'ar-button') {
+            viewerSettings.style.display = 'none';
+            advancedSettings.style.display = 'none';
+        } else {
+            viewerSettings.style.display = 'block';
+            advancedSettings.style.display = 'block';
+        }
+    });
+
+    // Auto-update preview button
+    var updatePreviewBtn = document.createElement('button');
+    updatePreviewBtn.className = 'btn-auto-preview';
+    updatePreviewBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Auto Preview';
+    updatePreviewBtn.style.cssText = 'position:absolute;top:15px;right:15px;background:#7eaf91;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;transition:all 0.3s ease;display:flex;align-items:center;gap:6px;';
+    updatePreviewBtn.onclick = function() {
+        var slug = document.getElementById('splat-slug').value;
+        if (slug) {
+            generateShortcode();
+        } else {
+            alert('Please select a 3D model first!');
+        }
+    };
+
+    var previewSection = document.querySelector('.preview-section');
+    if (previewSection) {
+        previewSection.style.position = 'relative';
+        previewSection.querySelector('h2').parentElement.appendChild(updatePreviewBtn);
+    }
+
+    // Real-time preview updates on change
+    var previewTriggers = ['viewer-width', 'viewer-height', 'enable-animation'];
+    previewTriggers.forEach(function(id) {
+        var element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('change', function() {
+                var slug = document.getElementById('splat-slug').value;
+                if (slug && document.getElementById('element-type').value === 'viewer') {
+                    var width = document.getElementById('viewer-width').value || '100%';
+                    var height = document.getElementById('viewer-height').value || '600px';
+                    var animate = document.getElementById('enable-animation').checked ? '1' : '0';
+                    updatePreview(slug, width, height, animate);
+                }
+            });
+        }
+    });
+
+    // Update preview when splat selection changes
+    document.getElementById('splat-slug').addEventListener('change', function() {
+        if (this.value) {
+            generateShortcode();
+        }
+    });
+});
+</script>

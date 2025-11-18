@@ -11,6 +11,7 @@
     <menu>
         <add id="GreenView_Viewer::greenview" title="GreenView" module="GreenView_Viewer" sortOrder="70" resource="GreenView_Viewer::greenview"/>
         <add id="GreenView_Viewer::welcome" title="Welcome" module="GreenView_Viewer" sortOrder="5" parent="GreenView_Viewer::greenview" action="greenview/welcome/index" resource="GreenView_Viewer::welcome"/>
+        <add id="GreenView_Viewer::builder" title="Shortcode Builder" module="GreenView_Viewer" sortOrder="8" parent="GreenView_Viewer::greenview" action="greenview/builder/index" resource="GreenView_Viewer::builder"/>
         <add id="GreenView_Viewer::splats" title="Manage Splats" module="GreenView_Viewer" sortOrder="10" parent="GreenView_Viewer::greenview" action="greenview/splats/index" resource="GreenView_Viewer::splats"/>
         <add id="GreenView_Viewer::sync" title="Sync Splats" module="GreenView_Viewer" sortOrder="20" parent="GreenView_Viewer::greenview" action="greenview/sync/index" resource="GreenView_Viewer::sync"/>
         <add id="GreenView_Viewer::logs" title="API Logs" module="GreenView_Viewer" sortOrder="30" parent="GreenView_Viewer::greenview" action="greenview/logs/index" resource="GreenView_Viewer::logs"/>

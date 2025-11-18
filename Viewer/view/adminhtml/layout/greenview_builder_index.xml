@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Shortcode Builder Layout
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <head>
+        <link src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" src_type="url" rel="stylesheet" type="text/css"/>
+        <css src="GreenView_Viewer::css/builder.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="GreenView\Viewer\Block\Adminhtml\Builder\Index" name="greenview.builder.index"/>
+        </referenceContainer>
+    </body>
+</page>
