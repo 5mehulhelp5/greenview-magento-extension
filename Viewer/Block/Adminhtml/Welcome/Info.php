@@ -4,7 +4,7 @@
  *
  * @category   GreenView
  * @package    GreenView_Viewer
- * @author     Indra Gunanda
+ * @author     Angga Pixa
  * @copyright  Copyright (c) 2024 GreenView
  */
 

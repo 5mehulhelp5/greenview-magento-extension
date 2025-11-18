@@ -3,7 +3,7 @@
 A Magento 2 extension for integrating GreenView 3D viewers and AR functionality into your store.
 
 **Version:** 3.1.1
-**Author:** Indra Gunanda
+**Author:** Angga Pixa
 **License:** GPL-2.0+
 
 ## Features
@@ -392,5 +392,5 @@ This extension is licensed under GPL-2.0+. See LICENSE.txt for details.
 
 ## Credits
 
-Developed by Indra Gunanda for GreenView
+Developed by Angga Pixa for GreenView
 Based on the GreenView WordPress Plugin v3.1.1
