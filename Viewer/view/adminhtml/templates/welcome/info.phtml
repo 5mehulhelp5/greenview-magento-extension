@@ -1,0 +1,328 @@
+<?php
+/**
+ * Welcome Page Template
+ *
+ * @var $block \GreenView\Viewer\Block\Adminhtml\Welcome\Info
+ */
+?>
+
+<div class="greenview-welcome-page">
+    <!-- Header Section -->
+    <div class="welcome-header">
+        <div class="welcome-logo">
+            <h1>🌟 Welcome to GreenView 3D Viewer</h1>
+            <p class="version">Version <?= $block->escapeHtml($block->getExtensionVersion()) ?></p>
+        </div>
+    </div>
+
+    <!-- Status Section -->
+    <div class="welcome-section status-section">
+        <h2>📊 Extension Status</h2>
+        <div class="status-grid">
+            <div class="status-item <?= $block->isEnabled() ? 'status-active' : 'status-inactive' ?>">
+                <div class="status-icon"><?= $block->isEnabled() ? '✓' : '✗' ?></div>
+                <div class="status-content">
+                    <div class="status-label">Extension Status</div>
+                    <div class="status-value"><?= $block->isEnabled() ? 'Enabled' : 'Disabled' ?></div>
+                </div>
+            </div>
+            <div class="status-item <?= $block->hasCompanyToken() ? 'status-active' : 'status-inactive' ?>">
+                <div class="status-icon"><?= $block->hasCompanyToken() ? '✓' : '✗' ?></div>
+                <div class="status-content">
+                    <div class="status-label">API Token</div>
+                    <div class="status-value"><?= $block->hasCompanyToken() ? 'Configured' : 'Not Configured' ?></div>
+                </div>
+            </div>
+            <div class="status-item <?= $block->isSandboxMode() ? 'status-warning' : 'status-active' ?>">
+                <div class="status-icon"><?= $block->isSandboxMode() ? '⚠' : '✓' ?></div>
+                <div class="status-content">
+                    <div class="status-label">Environment</div>
+                    <div class="status-value"><?= $block->isSandboxMode() ? 'Sandbox' : 'Production' ?></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About GreenView Section -->
+    <div class="welcome-section">
+        <h2>🌿 About GreenView</h2>
+        <p>GreenView is a cutting-edge platform that brings 3D visualization and Augmented Reality (AR) experiences to your e-commerce store. Our technology enables customers to view products in stunning 3D detail and visualize them in their own space using AR.</p>
+        <div class="feature-highlights">
+            <div class="highlight-item">
+                <span class="highlight-icon">🎯</span>
+                <strong>Immersive Shopping:</strong> Let customers explore products in 360° before purchasing
+            </div>
+            <div class="highlight-item">
+                <span class="highlight-icon">📱</span>
+                <strong>AR Experience:</strong> Visualize products in real-world environments using mobile devices
+            </div>
+            <div class="highlight-item">
+                <span class="highlight-icon">🚀</span>
+                <strong>Boost Sales:</strong> Increase customer confidence and reduce return rates
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="welcome-section features-section">
+        <h2>✨ Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>3D Splat Viewer</h3>
+                <p>Display high-quality 3D models using Gaussian Splatting technology for realistic product visualization.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📲</div>
+                <h3>AR Button Widget</h3>
+                <p>One-click AR viewing on mobile devices with automatic QR code generation for desktop users.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>API Synchronization</h3>
+                <p>Seamlessly sync 3D models from GreenView platform with automatic caching for optimal performance.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Easy Integration</h3>
+                <p>Simple widget-based implementation - just add to any page or product using Page Builder.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>API Monitoring</h3>
+                <p>Built-in logging system to track API calls and troubleshoot integration issues.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <h3>Smart Caching</h3>
+                <p>Configurable file caching system reduces API calls and improves loading times.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technology Section -->
+    <div class="welcome-section tech-section">
+        <h2>🔧 Technology Stack</h2>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <strong>Gaussian Splatting:</strong>
+                <span>Advanced 3D rendering technology for photorealistic models</span>
+            </div>
+            <div class="tech-item">
+                <strong>WebGL:</strong>
+                <span>Browser-based 3D graphics without plugins</span>
+            </div>
+            <div class="tech-item">
+                <strong>Web Components:</strong>
+                <span>Custom &lt;cds-splat&gt; element for easy integration</span>
+            </div>
+            <div class="tech-item">
+                <strong>RESTful API:</strong>
+                <span>Secure integration with GreenView platform</span>
+            </div>
+            <div class="tech-item">
+                <strong>Magento 2 Architecture:</strong>
+                <span>Native integration with DI, widgets, and UI components</span>
+            </div>
+            <div class="tech-item">
+                <strong>Responsive Design:</strong>
+                <span>Works seamlessly on desktop, tablet, and mobile</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- How to Use Section -->
+    <div class="welcome-section usage-section">
+        <h2>📖 How to Use This Extension</h2>
+        <div class="usage-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Configure API Token</h3>
+                    <p>Go to <a href="<?= $block->escapeUrl($block->getSettingsUrl()) ?>">Settings</a> and enter your GreenView company token. You can get this from your GreenView account dashboard.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Sync Your Splats</h3>
+                    <p>Navigate to <a href="<?= $block->escapeUrl($block->getSyncSplatsUrl()) ?>">Sync Splats</a> to download all available 3D models from your GreenView account.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>View Splats</h3>
+                    <p>Check <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>">Manage Splats</a> to see all synchronized models and their details.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Add 3D Viewer & AR to Your Pages</h3>
+                    <p>There are two ways to display the 3D viewer and AR button in your store:</p>
+
+                    <div class="implementation-method">
+                        <h4>📝 Method 1: Using Widgets (Easiest - No Coding Required)</h4>
+
+                        <div class="sub-step">
+                            <strong>A. Add to CMS Pages:</strong>
+                            <ol>
+                                <li>Go to <strong>Content → Pages</strong></li>
+                                <li>Edit or create a page</li>
+                                <li>In the content editor, click <strong>"Insert Widget"</strong> button</li>
+                                <li>Select <strong>"GreenView 3D Viewer"</strong> from widget type dropdown</li>
+                                <li>Configure the widget:
+                                    <ul>
+                                        <li><strong>Splat Slug:</strong> Enter the slug from your synced splat (e.g., "my-product-model")</li>
+                                        <li><strong>Width:</strong> Set viewer width (e.g., "100%" or "800px")</li>
+                                        <li><strong>Height:</strong> Set viewer height (e.g., "600px")</li>
+                                        <li><strong>Animate:</strong> Choose "Yes" for auto-rotation</li>
+                                    </ul>
+                                </li>
+                                <li>Click <strong>"Insert Widget"</strong> to add it to your page</li>
+                                <li>For AR button, repeat steps 3-4 but select <strong>"GreenView AR Button"</strong></li>
+                                <li>Configure AR button:
+                                    <ul>
+                                        <li><strong>Splat Slug:</strong> Same slug as the 3D viewer</li>
+                                        <li><strong>Button Text:</strong> e.g., "View in AR"</li>
+                                        <li><strong>Background Color:</strong> e.g., "#667eea"</li>
+                                        <li><strong>Text Color:</strong> e.g., "#ffffff"</li>
+                                        <li><strong>Width:</strong> e.g., "200px"</li>
+                                    </ul>
+                                </li>
+                                <li>Save the page</li>
+                            </ol>
+                        </div>
+
+                        <div class="sub-step">
+                            <strong>B. Add to Product Pages:</strong>
+                            <ol>
+                                <li>Go to <strong>Catalog → Products</strong></li>
+                                <li>Edit the product you want to add 3D/AR to</li>
+                                <li>Scroll to <strong>"Content"</strong> section</li>
+                                <li>Click <strong>"Description"</strong> or create a custom attribute</li>
+                                <li>Click <strong>"Insert Widget"</strong> button</li>
+                                <li>Follow steps 4-8 from Method A above</li>
+                                <li>Save the product</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="implementation-method">
+                        <h4>💻 Method 2: Using Layout XML (For Developers)</h4>
+
+                        <div class="code-example">
+                            <strong>Add to any layout XML file (e.g., cms_page_view.xml or catalog_product_view.xml):</strong>
+                            <pre><code>&lt;!-- Add 3D Viewer --&gt;
+&lt;referenceContainer name="content"&gt;
+    &lt;block class="GreenView\Viewer\Block\Viewer" name="greenview.viewer"&gt;
+        &lt;arguments&gt;
+            &lt;argument name="slug" xsi:type="string"&gt;your-splat-slug&lt;/argument&gt;
+            &lt;argument name="width" xsi:type="string"&gt;100%&lt;/argument&gt;
+            &lt;argument name="height" xsi:type="string"&gt;600px&lt;/argument&gt;
+            &lt;argument name="animate" xsi:type="string"&gt;1&lt;/argument&gt;
+        &lt;/arguments&gt;
+    &lt;/block&gt;
+&lt;/referenceContainer&gt;
+
+&lt;!-- Add AR Button --&gt;
+&lt;referenceContainer name="content"&gt;
+    &lt;block class="GreenView\Viewer\Block\ArButton" name="greenview.ar.button"&gt;
+        &lt;arguments&gt;
+            &lt;argument name="slug" xsi:type="string"&gt;your-splat-slug&lt;/argument&gt;
+            &lt;argument name="text" xsi:type="string"&gt;View in AR&lt;/argument&gt;
+            &lt;argument name="bg_color" xsi:type="string"&gt;#667eea&lt;/argument&gt;
+            &lt;argument name="text_color" xsi:type="string"&gt;#ffffff&lt;/argument&gt;
+        &lt;/arguments&gt;
+    &lt;/block&gt;
+&lt;/referenceContainer&gt;</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="frontend-preview">
+                        <h4>🎯 What You'll See on Frontend:</h4>
+                        <ul>
+                            <li><strong>3D Viewer:</strong> Interactive viewer where customers can rotate, zoom, and explore the 3D model</li>
+                            <li><strong>AR Button (Mobile):</strong> Clicking opens the AR viewer in the device's camera</li>
+                            <li><strong>AR Button (Desktop):</strong> Shows a QR code that users can scan with their phone to view in AR</li>
+                        </ul>
+                    </div>
+
+                    <div class="tips-box">
+                        <h4>💡 Pro Tips:</h4>
+                        <ul>
+                            <li>Place both the 3D viewer and AR button together for best user experience</li>
+                            <li>Use the same slug for both widgets so they display the same model</li>
+                            <li>Test on mobile devices to ensure AR functionality works properly</li>
+                            <li>Recommended viewer height: 400px-600px for optimal viewing</li>
+                            <li>You can find splat slugs in the <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>">Manage Splats</a> grid</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Monitor Activity</h3>
+                    <p>Visit <a href="<?= $block->escapeUrl($block->getApiLogsUrl()) ?>">API Logs</a> to monitor API calls and troubleshoot any integration issues.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Section -->
+    <div class="welcome-section actions-section">
+        <h2>🚀 Quick Actions</h2>
+        <div class="action-buttons">
+            <a href="<?= $block->escapeUrl($block->getSettingsUrl()) ?>" class="action-button primary">
+                <span class="button-icon">⚙️</span>
+                <span class="button-text">Configure Settings</span>
+            </a>
+            <a href="<?= $block->escapeUrl($block->getSyncSplatsUrl()) ?>" class="action-button secondary">
+                <span class="button-icon">🔄</span>
+                <span class="button-text">Sync Splats</span>
+            </a>
+            <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>" class="action-button secondary">
+                <span class="button-icon">📦</span>
+                <span class="button-text">Manage Splats</span>
+            </a>
+            <a href="<?= $block->escapeUrl($block->getApiLogsUrl()) ?>" class="action-button secondary">
+                <span class="button-icon">📊</span>
+                <span class="button-text">View Logs</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Documentation & Support Section -->
+    <div class="welcome-section support-section">
+        <h2>📚 Documentation & Support</h2>
+        <div class="support-grid">
+            <div class="support-card">
+                <h3>📖 Documentation</h3>
+                <p>Visit the GreenView documentation portal for comprehensive guides, API references, and integration tutorials.</p>
+                <a href="https://docs.green-view.nl" target="_blank" class="support-link">View Documentation →</a>
+            </div>
+            <div class="support-card">
+                <h3>💬 Support</h3>
+                <p>Need help? Our support team is ready to assist you with any questions or technical issues.</p>
+                <a href="https://green-view.nl/support" target="_blank" class="support-link">Contact Support →</a>
+            </div>
+            <div class="support-card">
+                <h3>🌐 GreenView Platform</h3>
+                <p>Manage your 3D models, create new splats, and access your account dashboard on the GreenView platform.</p>
+                <a href="https://green-view.nl" target="_blank" class="support-link">Visit Platform →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="welcome-footer">
+        <p>Made with ❤️ by GreenView | © <?= date('Y') ?> All rights reserved</p>
+        <p class="footer-links">
+            <a href="https://green-view.nl/privacy" target="_blank">Privacy Policy</a> |
+            <a href="https://green-view.nl/terms" target="_blank">Terms of Service</a> |
+            <a href="https://green-view.nl/about" target="_blank">About Us</a>
+        </p>
+    </div>
+</div>

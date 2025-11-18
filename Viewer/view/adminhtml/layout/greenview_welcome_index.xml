@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Welcome Page Layout
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <head>
+        <css src="GreenView_Viewer::css/welcome.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="GreenView\Viewer\Block\Adminhtml\Welcome\Info" name="greenview.welcome.info"/>
+        </referenceContainer>
+    </body>
+</page>
