@@ -14,11 +14,12 @@ $slug = $block->getSplatSlug();
 $fileUrl = $block->getFileUrl();
 $splatData = $block->getSplatData();
 
-// Debug: Uncomment to see values
-// echo "<!-- Slug: " . $slug . " -->";
-// echo "<!-- File URL: " . $fileUrl . " -->";
-// echo "<!-- Is 3D Enabled: " . ($block->is3DEnabled() ? 'yes' : 'no') . " -->";
-// echo "<!-- Is AR Enabled: " . ($block->isAREnabled() ? 'yes' : 'no') . " -->";
+// Debug: Check values
+echo "<!-- DEBUG: Slug: " . ($slug ? $slug : 'NULL') . " -->";
+echo "<!-- DEBUG: File URL: " . ($fileUrl ? $fileUrl : 'NULL') . " -->";
+echo "<!-- DEBUG: Is 3D Enabled: " . ($block->is3DEnabled() ? 'YES' : 'NO') . " -->";
+echo "<!-- DEBUG: Is AR Enabled: " . ($block->isAREnabled() ? 'YES' : 'NO') . " -->";
+echo "<!-- DEBUG: Splat Data: " . ($splatData ? json_encode($splatData) : 'NULL') . " -->";
 ?>
 
 <div class="greenview-product-container" style="margin: 30px 0; padding: 20px; background: #f9fafb; border-radius: 8px;">

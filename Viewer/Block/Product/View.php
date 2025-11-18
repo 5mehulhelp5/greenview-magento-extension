@@ -108,18 +108,33 @@ class View extends Template
     }
 
     /**
-     * Get splat data
+     * Get splat model by slug
      *
-     * @return array|null
+     * @return \GreenView\Viewer\Model\Splat|null
      */
-    public function getSplatData()
+    public function getSplat()
     {
         $slug = $this->getSplatSlug();
         if (!$slug) {
             return null;
         }
 
-        return $this->splatManager->getSplatData($slug);
+        return $this->splatManager->getSplatBySlug($slug);
+    }
+
+    /**
+     * Get splat data
+     *
+     * @return array|null
+     */
+    public function getSplatData()
+    {
+        $splat = $this->getSplat();
+        if (!$splat) {
+            return null;
+        }
+
+        return $splat->getDataJsonArray();
     }
 
     /**
@@ -129,12 +144,12 @@ class View extends Template
      */
     public function getFileUrl()
     {
-        $splatData = $this->getSplatData();
-        if (!$splatData || !isset($splatData['file_url'])) {
+        $splat = $this->getSplat();
+        if (!$splat) {
             return null;
         }
 
-        return $splatData['file_url'];
+        return $splat->getData('file_url');
     }
 
     /**
