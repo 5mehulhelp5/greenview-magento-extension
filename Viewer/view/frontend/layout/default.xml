@@ -9,6 +9,7 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
+        <link src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" src_type="url" rel="stylesheet" type="text/css"/>
         <script src="GreenView_Viewer::js/cds-splat.iife.js"/>
         <css src="GreenView_Viewer::css/greenview-viewer.css"/>
     </head>

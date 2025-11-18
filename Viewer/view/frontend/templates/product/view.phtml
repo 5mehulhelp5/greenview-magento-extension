@@ -25,8 +25,8 @@ echo "<!-- DEBUG: Splat Data: " . ($splatData ? json_encode($splatData) : 'NULL'
 <div class="greenview-product-container" style="margin: 30px 0; padding: 20px; background: #f9fafb; border-radius: 8px;">
     <?php if ($block->is3DEnabled() && $fileUrl): ?>
         <div class="greenview-3d-viewer-wrapper" style="margin-bottom: 20px;">
-            <h3 style="font-size: 20px; margin-bottom: 15px; color: #333; font-weight: 600;">
-                🎨 Explore in 3D
+            <h3 style="font-size: 20px; margin-bottom: 15px; color: #38585a; font-weight: 600;">
+                <i class="fas fa-palette"></i> Explore in 3D
             </h3>
             <div style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                 <cds-splat
@@ -36,7 +36,7 @@ echo "<!-- DEBUG: Splat Data: " . ($splatData ? json_encode($splatData) : 'NULL'
                 </cds-splat>
             </div>
             <p style="font-size: 13px; color: #666; margin-top: 10px; text-align: center;">
-                💡 Click and drag to rotate • Scroll to zoom
+                <i class="fas fa-lightbulb"></i> Click and drag to rotate • Scroll to zoom
             </p>
         </div>
     <?php endif; ?>
@@ -56,10 +56,10 @@ echo "<!-- DEBUG: Splat Data: " . ($splatData ? json_encode($splatData) : 'NULL'
 
             <button
                 onclick="<?= $isMobile ? "window.location.href='" . $block->escapeJs($arUrl) . "'" : "document.getElementById('greenview-qr-modal-" . $block->escapeHtmlAttr($slug) . "').style.display='flex'" ?>"
-                style="background: #667eea; color: #ffffff; border: 2px solid #667eea; padding: 12px 30px; font-size: 16px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; min-width: 200px;"
-                onmouseover="this.style.background='#5568d3'"
-                onmouseout="this.style.background='#667eea'">
-                📱 View in AR
+                style="background: #38585a; color: #ffffff; border: 2px solid #38585a; padding: 12px 30px; font-size: 16px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; min-width: 200px;"
+                onmouseover="this.style.background='#2a4245'"
+                onmouseout="this.style.background='#38585a'">
+                <i class="fas fa-mobile-alt"></i> View in AR
             </button>
 
             <?php if (!$isMobile): ?>
@@ -71,7 +71,7 @@ echo "<!-- DEBUG: Splat Data: " . ($splatData ? json_encode($splatData) : 'NULL'
                     <img src="<?= $block->escapeUrl($qrUrl) ?>" alt="QR Code" style="max-width: 100%; height: auto; border-radius: 8px;"/>
                     <p style="margin: 20px 0 10px; color: #666; font-size: 14px;">Open your phone camera and scan this QR code</p>
                     <button onclick="document.getElementById('greenview-qr-modal-<?= $block->escapeHtmlAttr($slug) ?>').style.display='none'"
-                            style="margin-top: 15px; padding: 10px 25px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600;">
+                            style="margin-top: 15px; padding: 10px 25px; background: #38585a; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600;">
                         Close
                     </button>
                 </div>
@@ -79,7 +79,7 @@ echo "<!-- DEBUG: Splat Data: " . ($splatData ? json_encode($splatData) : 'NULL'
             <?php endif; ?>
 
             <p style="font-size: 13px; color: #666; margin-top: 12px;">
-                📱 View this product in your space using Augmented Reality
+                <i class="fas fa-mobile-alt"></i> View this product in your space using Augmented Reality
             </p>
         </div>
     <?php endif; ?>

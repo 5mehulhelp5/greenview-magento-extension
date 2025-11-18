@@ -48,10 +48,10 @@ $productName = $product ? $product->getName() : '';
 
         <button
             onclick="<?= $isMobile ? "window.location.href='" . $block->escapeJs($arUrl) . "'" : "document.getElementById('greenview-qr-modal-media-" . $block->escapeHtmlAttr($slug) . "').style.display='flex'" ?>"
-            style="background: #667eea; color: #ffffff; border: 2px solid #667eea; padding: 14px 35px; font-size: 16px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);"
-            onmouseover="this.style.background='#5568d3'; this.style.boxShadow='0 6px 16px rgba(102, 126, 234, 0.4)'; this.style.transform='translateY(-2px)'"
-            onmouseout="this.style.background='#667eea'; this.style.boxShadow='0 4px 12px rgba(102, 126, 234, 0.3)'; this.style.transform='translateY(0)'">
-            📱 View in Your Space (AR)
+            style="background: #38585a; color: #ffffff; border: 2px solid #38585a; padding: 14px 35px; font-size: 16px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(56, 88, 90, 0.3);"
+            onmouseover="this.style.background='#2a4245'; this.style.boxShadow='0 6px 16px rgba(56, 88, 90, 0.4)'; this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.background='#38585a'; this.style.boxShadow='0 4px 12px rgba(56, 88, 90, 0.3)'; this.style.transform='translateY(0)'">
+            <i class="fas fa-mobile-alt"></i> View in Your Space (AR)
         </button>
 
         <?php if (!$isMobile): ?>
@@ -63,10 +63,10 @@ $productName = $product ? $product->getName() : '';
                 <p style="margin: 0 0 25px 0; color: #666; font-size: 15px; line-height: 1.5;">Scan this QR code with your phone to see this product in your space</p>
                 <img src="<?= $block->escapeUrl($qrUrl) ?>" alt="QR Code for AR" style="max-width: 100%; height: auto; border-radius: 12px; border: 4px solid #f3f4f6;"/>
                 <p style="margin: 25px 0 15px; color: #666; font-size: 14px;">
-                    📱 Open your phone camera and point at the QR code
+                    <i class="fas fa-mobile-alt"></i> Open your phone camera and point at the QR code
                 </p>
                 <button onclick="document.getElementById('greenview-qr-modal-media-<?= $block->escapeHtmlAttr($slug) ?>').style.display='none'"
-                        style="margin-top: 10px; padding: 12px 30px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);">
+                        style="margin-top: 10px; padding: 12px 30px; background: #38585a; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; box-shadow: 0 2px 8px rgba(56, 88, 90, 0.3);">
                     Close
                 </button>
             </div>
@@ -79,8 +79,8 @@ $productName = $product ? $product->getName() : '';
     </div>
 
     <!-- Fallback Message -->
-    <div style="margin-top: 20px; padding: 15px; background: #f0f9ff; border-left: 4px solid #0284c7; border-radius: 6px; font-size: 13px; color: #0c4a6e;">
-        <strong>💡 Interactive 3D Model:</strong> This product uses 3D technology instead of photos. Rotate, zoom, and explore every detail from any angle.
+    <div style="margin-top: 20px; padding: 15px; background: #f0fdf4; border-left: 4px solid #7eaf91; border-radius: 6px; font-size: 13px; color: #0c4a6e;">
+        <strong><i class="fas fa-lightbulb"></i> Interactive 3D Model:</strong> This product uses 3D technology instead of photos. Rotate, zoom, and explore every detail from any angle.
     </div>
 </div>
 

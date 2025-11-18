@@ -10,31 +10,31 @@
     <!-- Header Section -->
     <div class="welcome-header">
         <div class="welcome-logo">
-            <h1>🌟 Welcome to GreenView 3D Viewer</h1>
+            <h1 style="color:white;">Welcome to GreenView 3D Viewer</h1>
             <p class="version">Version <?= $block->escapeHtml($block->getExtensionVersion()) ?></p>
         </div>
     </div>
 
     <!-- Status Section -->
     <div class="welcome-section status-section">
-        <h2>📊 Extension Status</h2>
+        <h2><i class="fas fa-chart-bar"></i> Extension Status</h2>
         <div class="status-grid">
             <div class="status-item <?= $block->isEnabled() ? 'status-active' : 'status-inactive' ?>">
-                <div class="status-icon"><?= $block->isEnabled() ? '✓' : '✗' ?></div>
+                <div class="status-icon"><i class="fas <?= $block->isEnabled() ? 'fa-check' : 'fa-times' ?>"></i></div>
                 <div class="status-content">
                     <div class="status-label">Extension Status</div>
                     <div class="status-value"><?= $block->isEnabled() ? 'Enabled' : 'Disabled' ?></div>
                 </div>
             </div>
             <div class="status-item <?= $block->hasCompanyToken() ? 'status-active' : 'status-inactive' ?>">
-                <div class="status-icon"><?= $block->hasCompanyToken() ? '✓' : '✗' ?></div>
+                <div class="status-icon"><i class="fas <?= $block->hasCompanyToken() ? 'fa-check' : 'fa-times' ?>"></i></div>
                 <div class="status-content">
                     <div class="status-label">API Token</div>
                     <div class="status-value"><?= $block->hasCompanyToken() ? 'Configured' : 'Not Configured' ?></div>
                 </div>
             </div>
             <div class="status-item <?= $block->isSandboxMode() ? 'status-warning' : 'status-active' ?>">
-                <div class="status-icon"><?= $block->isSandboxMode() ? '⚠' : '✓' ?></div>
+                <div class="status-icon"><i class="fas <?= $block->isSandboxMode() ? 'fa-exclamation-triangle' : 'fa-check' ?>"></i></div>
                 <div class="status-content">
                     <div class="status-label">Environment</div>
                     <div class="status-value"><?= $block->isSandboxMode() ? 'Sandbox' : 'Production' ?></div>
@@ -45,19 +45,19 @@
 
     <!-- About GreenView Section -->
     <div class="welcome-section">
-        <h2>🌿 About GreenView</h2>
+        <h2><i class="fas fa-leaf"></i> About GreenView</h2>
         <p>GreenView is a cutting-edge platform that brings 3D visualization and Augmented Reality (AR) experiences to your e-commerce store. Our technology enables customers to view products in stunning 3D detail and visualize them in their own space using AR.</p>
         <div class="feature-highlights">
             <div class="highlight-item">
-                <span class="highlight-icon">🎯</span>
+                <span class="highlight-icon"><i class="fas fa-bullseye"></i></span>
                 <strong>Immersive Shopping:</strong> Let customers explore products in 360° before purchasing
             </div>
             <div class="highlight-item">
-                <span class="highlight-icon">📱</span>
+                <span class="highlight-icon"><i class="fas fa-mobile-alt"></i></span>
                 <strong>AR Experience:</strong> Visualize products in real-world environments using mobile devices
             </div>
             <div class="highlight-item">
-                <span class="highlight-icon">🚀</span>
+                <span class="highlight-icon"><i class="fas fa-rocket"></i></span>
                 <strong>Boost Sales:</strong> Increase customer confidence and reduce return rates
             </div>
         </div>
@@ -65,35 +65,35 @@
 
     <!-- Features Section -->
     <div class="welcome-section features-section">
-        <h2>✨ Key Features</h2>
+        <h2><i class="fas fa-sparkles"></i> Key Features</h2>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🎨</div>
+                <div class="feature-icon"><i class="fas fa-palette"></i></div>
                 <h3>3D Splat Viewer</h3>
                 <p>Display high-quality 3D models using Gaussian Splatting technology for realistic product visualization.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📲</div>
+                <div class="feature-icon"><i class="fas fa-mobile-screen-button"></i></div>
                 <h3>AR Button Widget</h3>
                 <p>One-click AR viewing on mobile devices with automatic QR code generation for desktop users.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔄</div>
+                <div class="feature-icon"><i class="fas fa-sync"></i></div>
                 <h3>API Synchronization</h3>
                 <p>Seamlessly sync 3D models from GreenView platform with automatic caching for optimal performance.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
+                <div class="feature-icon"><i class="fas fa-cog"></i></div>
                 <h3>Easy Integration</h3>
                 <p>Simple widget-based implementation - just add to any page or product using Page Builder.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📊</div>
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
                 <h3>API Monitoring</h3>
                 <p>Built-in logging system to track API calls and troubleshoot integration issues.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">💾</div>
+                <div class="feature-icon"><i class="fas fa-save"></i></div>
                 <h3>Smart Caching</h3>
                 <p>Configurable file caching system reduces API calls and improves loading times.</p>
             </div>
@@ -102,7 +102,7 @@
 
     <!-- Technology Section -->
     <div class="welcome-section tech-section">
-        <h2>🔧 Technology Stack</h2>
+        <h2><i class="fas fa-wrench"></i> Technology Stack</h2>
         <div class="tech-grid">
             <div class="tech-item">
                 <strong>Gaussian Splatting:</strong>
@@ -133,7 +133,7 @@
 
     <!-- How to Use Section -->
     <div class="welcome-section usage-section">
-        <h2>📖 How to Use This Extension</h2>
+        <h2><i class="fas fa-book"></i> How to Use This Extension</h2>
         <div class="usage-steps">
             <div class="step">
                 <div class="step-number">1</div>
@@ -163,7 +163,7 @@
                     <p>There are two ways to display the 3D viewer and AR button in your store:</p>
 
                     <div class="implementation-method">
-                        <h4>📝 Method 1: Using Widgets (Easiest - No Coding Required)</h4>
+                        <h4><i class="fas fa-file-alt"></i> Method 1: Using Widgets (Easiest - No Coding Required)</h4>
 
                         <div class="sub-step">
                             <strong>A. Add to CMS Pages:</strong>
@@ -205,25 +205,25 @@
                                     <div style="margin: 10px 0; padding: 15px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
                                         <ul style="list-style: none; padding: 0; margin: 0;">
                                             <li style="margin-bottom: 12px;">
-                                                <strong>🏷️ GreenView Splat Slug:</strong>
+                                                <strong><i class="fas fa-tag"></i> GreenView Splat Slug:</strong>
                                                 <div style="margin-top: 5px; color: #666;">
                                                     Enter your splat slug from <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>">Manage Splats</a> (e.g., <code>luxury-chair-oak</code>)
                                                 </div>
                                             </li>
                                             <li style="margin-bottom: 12px;">
-                                                <strong>🎨 Enable 3D Viewer:</strong>
+                                                <strong><i class="fas fa-palette"></i> Enable 3D Viewer:</strong>
                                                 <div style="margin-top: 5px; color: #666;">
                                                     Set to "Yes" to show interactive 3D viewer <em>below product description</em>
                                                 </div>
                                             </li>
                                             <li style="margin-bottom: 12px;">
-                                                <strong>📱 Enable AR Button:</strong>
+                                                <strong><i class="fas fa-mobile-alt"></i> Enable AR Button:</strong>
                                                 <div style="margin-top: 5px; color: #666;">
                                                     Set to "Yes" to show AR button (works with 3D Viewer mode only)
                                                 </div>
                                             </li>
                                             <li>
-                                                <strong>⭐ Enable 3D Product (Replace Images):</strong> <span style="background: #fef3c7; padding: 2px 6px; border-radius: 3px; font-size: 11px;">NEW!</span>
+                                                <strong><i class="fas fa-star"></i> Enable 3D Product (Replace Images):</strong> <span style="background: #fef3c7; padding: 2px 6px; border-radius: 3px; font-size: 11px;">NEW!</span>
                                                 <div style="margin-top: 5px; color: #666;">
                                                     Set to "Yes" to <strong>replace the entire image gallery</strong> with a large 3D viewer (includes built-in AR button)
                                                 </div>
@@ -270,26 +270,26 @@
                                 </li>
                                 <li><strong>Configuration Examples:</strong>
                                     <div style="margin-top: 10px; padding: 12px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px;">
-                                        <strong>📝 Example 1 - Standard Mode (3D viewer below description):</strong>
+                                        <strong><i class="fas fa-file-alt"></i> Example 1 - Standard Mode (3D viewer below description):</strong>
                                         <ul style="margin-top: 8px;">
                                             <li>GreenView Splat Slug: <code>luxury-sofa</code></li>
-                                            <li>Enable 3D Viewer: <strong>Yes</strong> ✓</li>
-                                            <li>Enable AR Button: <strong>Yes</strong> ✓</li>
+                                            <li>Enable 3D Viewer: <strong>Yes</strong> <i class="fas fa-check" style="color: #22c55e;"></i></li>
+                                            <li>Enable AR Button: <strong>Yes</strong> <i class="fas fa-check" style="color: #22c55e;"></i></li>
                                             <li>Enable 3D Product: <strong>No</strong></li>
                                         </ul>
-                                        <div style="margin-top: 8px; padding: 8px; background: white; border-left: 3px solid #0284c7; font-size: 13px;">
+                                        <div style="margin-top: 8px; padding: 8px; background: white; border-left: 3px solid #38585a; font-size: 13px;">
                                             Result: Images display normally, 3D viewer + AR button appear below description
                                         </div>
                                     </div>
-                                    <div style="margin-top: 10px; padding: 12px; background: #fef3c7; border: 1px solid #fde68a; border-radius: 6px;">
-                                        <strong>⭐ Example 2 - 3D Product Mode (replaces images):</strong>
+                                    <div style="margin-top: 10px; padding: 12px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px;">
+                                        <strong><i class="fas fa-star"></i> Example 2 - 3D Product Mode (replaces images):</strong>
                                         <ul style="margin-top: 8px;">
                                             <li>GreenView Splat Slug: <code>luxury-sofa</code></li>
                                             <li>Enable 3D Viewer: <strong>No</strong></li>
                                             <li>Enable AR Button: <strong>No</strong></li>
-                                            <li>Enable 3D Product: <strong>Yes</strong> ✓</li>
+                                            <li>Enable 3D Product: <strong>Yes</strong> <i class="fas fa-check" style="color: #22c55e;"></i></li>
                                         </ul>
-                                        <div style="margin-top: 8px; padding: 8px; background: white; border-left: 3px solid #f59e0b; font-size: 13px;">
+                                        <div style="margin-top: 8px; padding: 8px; background: white; border-left: 3px solid #7eaf91; font-size: 13px;">
                                             Result: Large 3D viewer replaces entire image gallery, AR button included automatically
                                         </div>
                                     </div>
@@ -299,7 +299,7 @@
                             </ol>
 
                             <div style="margin-top: 15px; padding: 12px; background: #fef2f2; border-left: 4px solid #ef4444; border-radius: 4px;">
-                                <strong>⚠️ Important:</strong> Do NOT enable both modes simultaneously:
+                                <strong><i class="fas fa-exclamation-triangle"></i> Important:</strong> Do NOT enable both modes simultaneously:
                                 <ul style="margin-top: 5px;">
                                     <li>Either use Standard Mode (Enable 3D Viewer + Enable AR Button)</li>
                                     <li>OR use 3D Product Mode (Enable 3D Product only)</li>
@@ -307,14 +307,14 @@
                                 </ul>
                             </div>
 
-                            <div style="margin-top: 10px; padding: 12px; background: #f0fdf4; border-left: 4px solid #22c55e; border-radius: 4px;">
-                                <strong>✅ Recommendation:</strong> For the best customer experience, use <strong>3D Product Mode</strong> for products where 3D visualization is the primary selling point (furniture, electronics, vehicles). The large, immersive viewer creates a premium feel and increases engagement.
+                            <div style="margin-top: 10px; padding: 12px; background: #f0fdf4; border-left: 4px solid #7eaf91; border-radius: 4px;">
+                                <strong><i class="fas fa-check-circle"></i> Recommendation:</strong> For the best customer experience, use <strong>3D Product Mode</strong> for products where 3D visualization is the primary selling point (furniture, electronics, vehicles). The large, immersive viewer creates a premium feel and increases engagement.
                             </div>
                         </div>
                     </div>
 
                     <div class="implementation-method">
-                        <h4>💻 Method 2: Using Layout XML (For Developers)</h4>
+                        <h4><i class="fas fa-laptop-code"></i> Method 2: Using Layout XML (For Developers)</h4>
 
                         <div class="code-example">
                             <strong>Add to any layout XML file (e.g., cms_page_view.xml or catalog_product_view.xml):</strong>
@@ -345,7 +345,7 @@
                     </div>
 
                     <div class="frontend-preview">
-                        <h4>🎯 What You'll See on Frontend:</h4>
+                        <h4><i class="fas fa-crosshairs"></i> What You'll See on Frontend:</h4>
                         <ul>
                             <li><strong>3D Viewer:</strong> Interactive viewer where customers can rotate, zoom, and explore the 3D model</li>
                             <li><strong>AR Button (Mobile):</strong> Clicking opens the AR viewer in the device's camera</li>
@@ -354,7 +354,7 @@
                     </div>
 
                     <div class="tips-box">
-                        <h4>💡 Pro Tips:</h4>
+                        <h4><i class="fas fa-lightbulb"></i> Pro Tips:</h4>
                         <ul>
                             <li>Place both the 3D viewer and AR button together for best user experience</li>
                             <li>Use the same slug for both widgets so they display the same model</li>
@@ -365,7 +365,7 @@
                     </div>
 
                     <div class="technical-details" style="margin-top: 20px; padding: 15px; background: #f9fafb; border: 1px solid #d1d5db; border-radius: 6px;">
-                        <h4>🔧 Technical Details:</h4>
+                        <h4><i class="fas fa-wrench"></i> Technical Details:</h4>
 
                         <div style="margin-top: 10px;">
                             <strong>AR URL Format:</strong>
@@ -398,55 +398,55 @@
                     </div>
 
                     <div class="troubleshooting-section" style="margin-top: 20px; padding: 15px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px;">
-                        <h4>🔍 Troubleshooting:</h4>
+                        <h4><i class="fas fa-search"></i> Troubleshooting:</h4>
 
                         <div style="margin-top: 10px;">
                             <strong>Problem: 3D viewer not showing on product page</strong>
                             <ul style="margin-top: 5px; font-size: 13px; color: #666;">
-                                <li>✓ Verify the splat slug is entered correctly (check <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>">Manage Splats</a>)</li>
-                                <li>✓ Ensure the appropriate toggle is enabled (Enable 3D Viewer or Enable 3D Product)</li>
-                                <li>✓ Clear Magento cache: <code>php bin/magento cache:flush</code></li>
-                                <li>✓ Check that splats have been synced from GreenView API</li>
-                                <li>✓ Verify file_url exists for the splat in database</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Verify the splat slug is entered correctly (check <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>">Manage Splats</a>)</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Ensure the appropriate toggle is enabled (Enable 3D Viewer or Enable 3D Product)</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Clear Magento cache: <code>php bin/magento cache:flush</code></li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Check that splats have been synced from GreenView API</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Verify file_url exists for the splat in database</li>
                             </ul>
                         </div>
 
                         <div style="margin-top: 15px;">
                             <strong>Problem: Product images still showing in 3D Product mode</strong>
                             <ul style="margin-top: 5px; font-size: 13px; color: #666;">
-                                <li>✓ Confirm "Enable 3D Product" is set to "Yes" (not "Enable 3D Viewer")</li>
-                                <li>✓ Clear cache and reload the page with hard refresh (Ctrl+Shift+R)</li>
-                                <li>✓ Check browser console for JavaScript errors</li>
-                                <li>✓ Verify the greenview-product-media block is rendering (view page source)</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Confirm "Enable 3D Product" is set to "Yes" (not "Enable 3D Viewer")</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Clear cache and reload the page with hard refresh (Ctrl+Shift+R)</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Check browser console for JavaScript errors</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Verify the greenview-product-media block is rendering (view page source)</li>
                             </ul>
                         </div>
 
                         <div style="margin-top: 15px;">
                             <strong>Problem: AR button not working</strong>
                             <ul style="margin-top: 5px; font-size: 13px; color: #666;">
-                                <li>✓ Verify company token is configured in <a href="<?= $block->escapeUrl($block->getSettingsUrl()) ?>">Settings</a></li>
-                                <li>✓ On mobile: Check that device supports AR (ARCore for Android, ARKit for iOS)</li>
-                                <li>✓ On desktop: QR code should appear in modal when button is clicked</li>
-                                <li>✓ Test the AR URL manually: <code>https://dashboard.green-view.nl/ar/{token}/{slug}</code></li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Verify company token is configured in <a href="<?= $block->escapeUrl($block->getSettingsUrl()) ?>">Settings</a></li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> On mobile: Check that device supports AR (ARCore for Android, ARKit for iOS)</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> On desktop: QR code should appear in modal when button is clicked</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Test the AR URL manually: <code>https://dashboard.green-view.nl/ar/{token}/{slug}</code></li>
                             </ul>
                         </div>
 
                         <div style="margin-top: 15px;">
                             <strong>Problem: Both modes showing at once (duplicate viewers)</strong>
                             <ul style="margin-top: 5px; font-size: 13px; color: #666;">
-                                <li>✓ Disable either "Enable 3D Viewer" or "Enable 3D Product" - only use ONE mode</li>
-                                <li>✓ Clear product cache after making changes</li>
-                                <li>✓ Recommended: Use 3D Product mode only for cleaner presentation</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Disable either "Enable 3D Viewer" or "Enable 3D Product" - only use ONE mode</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Clear product cache after making changes</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Recommended: Use 3D Product mode only for cleaner presentation</li>
                             </ul>
                         </div>
 
                         <div style="margin-top: 15px;">
                             <strong>Problem: Undefined variable errors</strong>
                             <ul style="margin-top: 5px; font-size: 13px; color: #666;">
-                                <li>✓ Run <code>php bin/magento setup:upgrade</code> to ensure all attributes are created</li>
-                                <li>✓ Check that product has the greenview_splat_slug attribute value set</li>
-                                <li>✓ Verify all template files are up to date</li>
-                                <li>✓ Check <code>var/log/system.log</code> for detailed error messages</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Run <code>php bin/magento setup:upgrade</code> to ensure all attributes are created</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Check that product has the greenview_splat_slug attribute value set</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Verify all template files are up to date</li>
+                                <li><i class="fas fa-check" style="color: #7eaf91;"></i> Check <code>var/log/system.log</code> for detailed error messages</li>
                             </ul>
                         </div>
 
@@ -469,22 +469,22 @@
 
     <!-- Quick Actions Section -->
     <div class="welcome-section actions-section">
-        <h2>🚀 Quick Actions</h2>
+        <h2><i class="fas fa-rocket"></i> Quick Actions</h2>
         <div class="action-buttons">
             <a href="<?= $block->escapeUrl($block->getSettingsUrl()) ?>" class="action-button primary">
-                <span class="button-icon">⚙️</span>
+                <span class="button-icon"><i class="fas fa-cog"></i></span>
                 <span class="button-text">Configure Settings</span>
             </a>
             <a href="<?= $block->escapeUrl($block->getSyncSplatsUrl()) ?>" class="action-button secondary">
-                <span class="button-icon">🔄</span>
+                <span class="button-icon"><i class="fas fa-sync"></i></span>
                 <span class="button-text">Sync Splats</span>
             </a>
             <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>" class="action-button secondary">
-                <span class="button-icon">📦</span>
+                <span class="button-icon"><i class="fas fa-box"></i></span>
                 <span class="button-text">Manage Splats</span>
             </a>
             <a href="<?= $block->escapeUrl($block->getApiLogsUrl()) ?>" class="action-button secondary">
-                <span class="button-icon">📊</span>
+                <span class="button-icon"><i class="fas fa-chart-bar"></i></span>
                 <span class="button-text">View Logs</span>
             </a>
         </div>
@@ -492,20 +492,20 @@
 
     <!-- Documentation & Support Section -->
     <div class="welcome-section support-section">
-        <h2>📚 Documentation & Support</h2>
+        <h2><i class="fas fa-book-open"></i> Documentation & Support</h2>
         <div class="support-grid">
             <div class="support-card">
-                <h3>📖 Documentation</h3>
+                <h3><i class="fas fa-book"></i> Documentation</h3>
                 <p>Visit the GreenView documentation portal for comprehensive guides, API references, and integration tutorials.</p>
-                <a href="https://docs.green-view.nl" target="_blank" class="support-link">View Documentation →</a>
+                <a href="https://green-view.nl/documentation" target="_blank" class="support-link">View Documentation →</a>
             </div>
             <div class="support-card">
-                <h3>💬 Support</h3>
+                <h3><i class="fas fa-comment-dots"></i> Support</h3>
                 <p>Need help? Our support team is ready to assist you with any questions or technical issues.</p>
                 <a href="https://green-view.nl/support" target="_blank" class="support-link">Contact Support →</a>
             </div>
             <div class="support-card">
-                <h3>🌐 GreenView Platform</h3>
+                <h3><i class="fas fa-globe"></i> GreenView Platform</h3>
                 <p>Manage your 3D models, create new splats, and access your account dashboard on the GreenView platform.</p>
                 <a href="https://green-view.nl" target="_blank" class="support-link">Visit Platform →</a>
             </div>
@@ -514,7 +514,7 @@
 
     <!-- Footer -->
     <div class="welcome-footer">
-        <p>Made with ❤️ by GreenView | © <?= date('Y') ?> All rights reserved</p>
+        <p>Made with <i class="fas fa-heart" style="color: #ef4444;"></i> by GreenView | © <?= date('Y') ?> All rights reserved</p>
         <p class="footer-links">
             <a href="https://green-view.nl/privacy" target="_blank">Privacy Policy</a> |
             <a href="https://green-view.nl/terms" target="_blank">Terms of Service</a> |
