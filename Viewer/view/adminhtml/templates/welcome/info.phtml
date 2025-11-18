@@ -201,61 +201,115 @@
                                 <li>Go to <strong>Catalog → Products</strong></li>
                                 <li>Edit the product you want to add 3D/AR to</li>
                                 <li>Scroll down to the <strong>"Content"</strong> section</li>
-                                <li>You'll see FOUR new GreenView fields:
-                                    <ul>
-                                        <li><strong>GreenView Splat Slug:</strong> Enter your splat slug (e.g., "my-chair-model")</li>
-                                        <li><strong>Enable 3D Viewer:</strong> Set to "Yes" to show the interactive 3D viewer below description</li>
-                                        <li><strong>Enable AR Button:</strong> Set to "Yes" to show the AR button</li>
-                                        <li><strong>Enable 3D Product (Replace Images):</strong> ⭐ <em>NEW!</em> Set to "Yes" to replace product images with 3D viewer in the main gallery area</li>
-                                    </ul>
+                                <li>You'll see <strong>FOUR new GreenView fields</strong>:
+                                    <div style="margin: 10px 0; padding: 15px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px;">
+                                        <ul style="list-style: none; padding: 0; margin: 0;">
+                                            <li style="margin-bottom: 12px;">
+                                                <strong>🏷️ GreenView Splat Slug:</strong>
+                                                <div style="margin-top: 5px; color: #666;">
+                                                    Enter your splat slug from <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>">Manage Splats</a> (e.g., <code>luxury-chair-oak</code>)
+                                                </div>
+                                            </li>
+                                            <li style="margin-bottom: 12px;">
+                                                <strong>🎨 Enable 3D Viewer:</strong>
+                                                <div style="margin-top: 5px; color: #666;">
+                                                    Set to "Yes" to show interactive 3D viewer <em>below product description</em>
+                                                </div>
+                                            </li>
+                                            <li style="margin-bottom: 12px;">
+                                                <strong>📱 Enable AR Button:</strong>
+                                                <div style="margin-top: 5px; color: #666;">
+                                                    Set to "Yes" to show AR button (works with 3D Viewer mode only)
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <strong>⭐ Enable 3D Product (Replace Images):</strong> <span style="background: #fef3c7; padding: 2px 6px; border-radius: 3px; font-size: 11px;">NEW!</span>
+                                                <div style="margin-top: 5px; color: #666;">
+                                                    Set to "Yes" to <strong>replace the entire image gallery</strong> with a large 3D viewer (includes built-in AR button)
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                                 <li>Choose your preferred display mode:
-                                    <ul>
-                                        <li><strong>Standard Mode</strong> (Enable 3D Viewer: Yes):
-                                            <ul>
-                                                <li>Product images shown normally in gallery</li>
-                                                <li>3D viewer appears below description</li>
-                                                <li>Great for products with both photos and 3D models</li>
-                                            </ul>
-                                        </li>
-                                        <li><strong>3D Product Mode</strong> (Enable 3D Product: Yes):
-                                            <ul>
-                                                <li>3D viewer replaces the main image gallery</li>
-                                                <li>Large, prominent 3D viewer in primary position</li>
-                                                <li>Perfect for furniture, cars, and complex products</li>
-                                                <li>Includes built-in AR button</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>Example Configurations:
                                     <div style="margin-top: 10px;">
-                                        <strong>Option 1 - Standard 3D (Below Description):</strong>
-                                        <ul>
-                                            <li>Splat Slug: <code>luxury-sofa</code></li>
-                                            <li>Enable 3D Viewer: <strong>Yes</strong></li>
-                                            <li>Enable AR Button: <strong>Yes</strong></li>
+                                        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                                            <thead>
+                                                <tr style="background: #f3f4f6;">
+                                                    <th style="padding: 10px; text-align: left; border: 1px solid #e5e7eb;">Mode</th>
+                                                    <th style="padding: 10px; text-align: left; border: 1px solid #e5e7eb;">Display Location</th>
+                                                    <th style="padding: 10px; text-align: left; border: 1px solid #e5e7eb;">Best For</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="padding: 10px; border: 1px solid #e5e7eb;"><strong>Standard Mode</strong></td>
+                                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">
+                                                        • Images shown in gallery (normal)<br>
+                                                        • 3D viewer below description<br>
+                                                        • Optional AR button below viewer
+                                                    </td>
+                                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">
+                                                        Products with both photos and 3D models
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 10px; border: 1px solid #e5e7eb;"><strong>3D Product Mode</strong> ⭐</td>
+                                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">
+                                                        • 3D viewer replaces image gallery<br>
+                                                        • Large, prominent viewer (600px)<br>
+                                                        • AR button included automatically
+                                                    </td>
+                                                    <td style="padding: 10px; border: 1px solid #e5e7eb;">
+                                                        Furniture, vehicles, complex 3D products that don't need photos
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                                <li><strong>Configuration Examples:</strong>
+                                    <div style="margin-top: 10px; padding: 12px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px;">
+                                        <strong>📝 Example 1 - Standard Mode (3D viewer below description):</strong>
+                                        <ul style="margin-top: 8px;">
+                                            <li>GreenView Splat Slug: <code>luxury-sofa</code></li>
+                                            <li>Enable 3D Viewer: <strong>Yes</strong> ✓</li>
+                                            <li>Enable AR Button: <strong>Yes</strong> ✓</li>
                                             <li>Enable 3D Product: <strong>No</strong></li>
                                         </ul>
+                                        <div style="margin-top: 8px; padding: 8px; background: white; border-left: 3px solid #0284c7; font-size: 13px;">
+                                            Result: Images display normally, 3D viewer + AR button appear below description
+                                        </div>
                                     </div>
-                                    <div style="margin-top: 10px;">
-                                        <strong>Option 2 - 3D Product (Replaces Images):</strong>
-                                        <ul>
-                                            <li>Splat Slug: <code>luxury-sofa</code></li>
+                                    <div style="margin-top: 10px; padding: 12px; background: #fef3c7; border: 1px solid #fde68a; border-radius: 6px;">
+                                        <strong>⭐ Example 2 - 3D Product Mode (replaces images):</strong>
+                                        <ul style="margin-top: 8px;">
+                                            <li>GreenView Splat Slug: <code>luxury-sofa</code></li>
                                             <li>Enable 3D Viewer: <strong>No</strong></li>
                                             <li>Enable AR Button: <strong>No</strong></li>
-                                            <li>Enable 3D Product: <strong>Yes</strong> ⭐</li>
+                                            <li>Enable 3D Product: <strong>Yes</strong> ✓</li>
                                         </ul>
+                                        <div style="margin-top: 8px; padding: 8px; background: white; border-left: 3px solid #f59e0b; font-size: 13px;">
+                                            Result: Large 3D viewer replaces entire image gallery, AR button included automatically
+                                        </div>
                                     </div>
                                 </li>
-                                <li>Click <strong>"Save"</strong></li>
+                                <li>Click <strong>"Save"</strong> and flush cache</li>
+                                <li>View the product page on frontend to see the 3D viewer in action!</li>
                             </ol>
-                            <p style="margin-top: 10px; padding: 10px; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px;">
-                                <strong>⭐ Recommended:</strong> Use "Enable 3D Product" for a premium, modern product presentation. The 3D viewer will be large and prominent in place of traditional product images!
-                            </p>
-                            <p style="margin-top: 10px; padding: 10px; background: #e0f2fe; border-left: 4px solid #0284c7; border-radius: 4px;">
-                                <strong>💡 Tip:</strong> Don't enable both modes at once. Choose either standard mode (viewer below) or 3D product mode (replaces images).
-                            </p>
+
+                            <div style="margin-top: 15px; padding: 12px; background: #fef2f2; border-left: 4px solid #ef4444; border-radius: 4px;">
+                                <strong>⚠️ Important:</strong> Do NOT enable both modes simultaneously:
+                                <ul style="margin-top: 5px;">
+                                    <li>Either use Standard Mode (Enable 3D Viewer + Enable AR Button)</li>
+                                    <li>OR use 3D Product Mode (Enable 3D Product only)</li>
+                                    <li>Enabling both will cause display conflicts</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-top: 10px; padding: 12px; background: #f0fdf4; border-left: 4px solid #22c55e; border-radius: 4px;">
+                                <strong>✅ Recommendation:</strong> For the best customer experience, use <strong>3D Product Mode</strong> for products where 3D visualization is the primary selling point (furniture, electronics, vehicles). The large, immersive viewer creates a premium feel and increases engagement.
+                            </div>
                         </div>
                     </div>
 
@@ -308,6 +362,98 @@
                             <li>Recommended viewer height: 400px-600px for optimal viewing</li>
                             <li>You can find splat slugs in the <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>">Manage Splats</a> grid</li>
                         </ul>
+                    </div>
+
+                    <div class="technical-details" style="margin-top: 20px; padding: 15px; background: #f9fafb; border: 1px solid #d1d5db; border-radius: 6px;">
+                        <h4>🔧 Technical Details:</h4>
+
+                        <div style="margin-top: 10px;">
+                            <strong>AR URL Format:</strong>
+                            <div style="margin-top: 5px; padding: 10px; background: #1e293b; color: #e2e8f0; border-radius: 4px; font-family: monospace; font-size: 13px;">
+                                https://dashboard.green-view.nl/ar/{company_token}/{slug}
+                            </div>
+                            <p style="margin-top: 8px; font-size: 13px; color: #666;">
+                                The AR button automatically generates this URL using your configured company token and the product's splat slug.
+                                On mobile devices, clicking the AR button opens this URL directly. On desktop, a QR code is displayed for scanning.
+                            </p>
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <strong>QR Code Generation:</strong>
+                            <div style="margin-top: 5px; padding: 10px; background: #1e293b; color: #e2e8f0; border-radius: 4px; font-family: monospace; font-size: 13px;">
+                                https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={ar_url}
+                            </div>
+                            <p style="margin-top: 8px; font-size: 13px; color: #666;">
+                                QR codes are generated dynamically using a free QR code API service. The codes point to the AR URL above.
+                            </p>
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <strong>File Caching:</strong>
+                            <p style="margin-top: 5px; font-size: 13px; color: #666;">
+                                3D model files (.splat, .ply, .gltf, .glb) are cached locally in <code>pub/media/greenview-splats/</code> to reduce API calls and improve loading times.
+                                Cache lifetime is configurable in <a href="<?= $block->escapeUrl($block->getSettingsUrl()) ?>">Settings</a>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="troubleshooting-section" style="margin-top: 20px; padding: 15px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px;">
+                        <h4>🔍 Troubleshooting:</h4>
+
+                        <div style="margin-top: 10px;">
+                            <strong>Problem: 3D viewer not showing on product page</strong>
+                            <ul style="margin-top: 5px; font-size: 13px; color: #666;">
+                                <li>✓ Verify the splat slug is entered correctly (check <a href="<?= $block->escapeUrl($block->getManageSplatsUrl()) ?>">Manage Splats</a>)</li>
+                                <li>✓ Ensure the appropriate toggle is enabled (Enable 3D Viewer or Enable 3D Product)</li>
+                                <li>✓ Clear Magento cache: <code>php bin/magento cache:flush</code></li>
+                                <li>✓ Check that splats have been synced from GreenView API</li>
+                                <li>✓ Verify file_url exists for the splat in database</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <strong>Problem: Product images still showing in 3D Product mode</strong>
+                            <ul style="margin-top: 5px; font-size: 13px; color: #666;">
+                                <li>✓ Confirm "Enable 3D Product" is set to "Yes" (not "Enable 3D Viewer")</li>
+                                <li>✓ Clear cache and reload the page with hard refresh (Ctrl+Shift+R)</li>
+                                <li>✓ Check browser console for JavaScript errors</li>
+                                <li>✓ Verify the greenview-product-media block is rendering (view page source)</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <strong>Problem: AR button not working</strong>
+                            <ul style="margin-top: 5px; font-size: 13px; color: #666;">
+                                <li>✓ Verify company token is configured in <a href="<?= $block->escapeUrl($block->getSettingsUrl()) ?>">Settings</a></li>
+                                <li>✓ On mobile: Check that device supports AR (ARCore for Android, ARKit for iOS)</li>
+                                <li>✓ On desktop: QR code should appear in modal when button is clicked</li>
+                                <li>✓ Test the AR URL manually: <code>https://dashboard.green-view.nl/ar/{token}/{slug}</code></li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <strong>Problem: Both modes showing at once (duplicate viewers)</strong>
+                            <ul style="margin-top: 5px; font-size: 13px; color: #666;">
+                                <li>✓ Disable either "Enable 3D Viewer" or "Enable 3D Product" - only use ONE mode</li>
+                                <li>✓ Clear product cache after making changes</li>
+                                <li>✓ Recommended: Use 3D Product mode only for cleaner presentation</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 15px;">
+                            <strong>Problem: Undefined variable errors</strong>
+                            <ul style="margin-top: 5px; font-size: 13px; color: #666;">
+                                <li>✓ Run <code>php bin/magento setup:upgrade</code> to ensure all attributes are created</li>
+                                <li>✓ Check that product has the greenview_splat_slug attribute value set</li>
+                                <li>✓ Verify all template files are up to date</li>
+                                <li>✓ Check <code>var/log/system.log</code> for detailed error messages</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 15px; padding: 10px; background: white; border-left: 3px solid #dc2626; border-radius: 4px;">
+                            <strong>Still having issues?</strong> Check <a href="<?= $block->escapeUrl($block->getApiLogsUrl()) ?>">API Logs</a> for detailed error messages,
+                            or review the extension logs in <code>var/log/system.log</code> and <code>var/log/exception.log</code>.
+                        </div>
                     </div>
                 </div>
             </div>
