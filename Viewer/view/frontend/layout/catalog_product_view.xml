@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Product View Layout
+ *
+ * @category   GreenView
+ * @package    GreenView_Viewer
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Add 3D Viewer and AR Button after product description -->
+        <referenceContainer name="product.info.main">
+            <block class="GreenView\Viewer\Block\Product\View"
+                   name="greenview.product.viewer"
+                   template="GreenView_Viewer::product/view.phtml"
+                   after="product.info.details"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -12,8 +12,8 @@ namespace GreenView\Viewer\Block\Product;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Registry;
-use GreenView\Viewer\Block\Viewer;
-use GreenView\Viewer\Block\ArButton;
+use GreenView\Viewer\Helper\Data as GreenViewHelper;
+use GreenView\Viewer\Service\SplatManager;
 
 class View extends Template
 {
@@ -23,32 +23,32 @@ class View extends Template
     protected $registry;
 
     /**
-     * @var Viewer
+     * @var GreenViewHelper
      */
-    protected $viewerBlock;
+    protected $greenViewHelper;
 
     /**
-     * @var ArButton
+     * @var SplatManager
      */
-    protected $arButtonBlock;
+    protected $splatManager;
 
     /**
      * @param Template\Context $context
      * @param Registry $registry
-     * @param Viewer $viewerBlock
-     * @param ArButton $arButtonBlock
+     * @param GreenViewHelper $greenViewHelper
+     * @param SplatManager $splatManager
      * @param array $data
      */
     public function __construct(
         Template\Context $context,
         Registry $registry,
-        Viewer $viewerBlock,
-        ArButton $arButtonBlock,
+        GreenViewHelper $greenViewHelper,
+        SplatManager $splatManager,
         array $data = []
     ) {
         $this->registry = $registry;
-        $this->viewerBlock = $viewerBlock;
-        $this->arButtonBlock = $arButtonBlock;
+        $this->greenViewHelper = $greenViewHelper;
+        $this->splatManager = $splatManager;
         parent::__construct($context, $data);
     }
 
@@ -108,43 +108,43 @@ class View extends Template
     }
 
     /**
-     * Get 3D viewer HTML
+     * Get splat data
      *
-     * @return string
+     * @return array|null
      */
-    public function get3DViewerHtml()
+    public function getSplatData()
     {
-        if (!$this->is3DEnabled() || !$this->getSplatSlug()) {
-            return '';
+        $slug = $this->getSplatSlug();
+        if (!$slug) {
+            return null;
         }
 
-        $this->viewerBlock->setData('slug', $this->getSplatSlug());
-        $this->viewerBlock->setData('width', '100%');
-        $this->viewerBlock->setData('height', '500px');
-        $this->viewerBlock->setData('animate', '0');
-
-        return $this->viewerBlock->toHtml();
+        return $this->splatManager->getSplatData($slug);
     }
 
     /**
-     * Get AR button HTML
+     * Get file URL for the splat
      *
-     * @return string
+     * @return string|null
      */
-    public function getARButtonHtml()
+    public function getFileUrl()
     {
-        if (!$this->isAREnabled() || !$this->getSplatSlug()) {
-            return '';
+        $splatData = $this->getSplatData();
+        if (!$splatData || !isset($splatData['file_url'])) {
+            return null;
         }
 
-        $this->arButtonBlock->setData('slug', $this->getSplatSlug());
-        $this->arButtonBlock->setData('text', 'View in AR');
-        $this->arButtonBlock->setData('bg_color', '#667eea');
-        $this->arButtonBlock->setData('text_color', '#ffffff');
-        $this->arButtonBlock->setData('border_color', '#667eea');
-        $this->arButtonBlock->setData('width', '200px');
+        return $splatData['file_url'];
+    }
 
-        return $this->arButtonBlock->toHtml();
+    /**
+     * Check if GreenView is enabled globally
+     *
+     * @return bool
+     */
+    public function isGreenViewEnabled()
+    {
+        return $this->greenViewHelper->isEnabled();
     }
 
     /**

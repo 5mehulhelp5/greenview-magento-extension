@@ -5,25 +5,75 @@
  * @var $block \GreenView\Viewer\Block\Product\View
  */
 
-if (!$block->shouldDisplay()) {
+// Check if GreenView is enabled and product has configuration
+if (!$block->isGreenViewEnabled() || !$block->shouldDisplay()) {
     return;
 }
+
+$slug = $block->getSplatSlug();
+$fileUrl = $block->getFileUrl();
+$splatData = $block->getSplatData();
+
+// Debug: Uncomment to see values
+// echo "<!-- Slug: " . $slug . " -->";
+// echo "<!-- File URL: " . $fileUrl . " -->";
+// echo "<!-- Is 3D Enabled: " . ($block->is3DEnabled() ? 'yes' : 'no') . " -->";
+// echo "<!-- Is AR Enabled: " . ($block->isAREnabled() ? 'yes' : 'no') . " -->";
 ?>
 
-<div class="greenview-product-container" style="margin: 20px 0;">
-    <?php if ($block->is3DEnabled()): ?>
-        <div class="greenview-3d-viewer-wrapper" style="margin-bottom: 15px;">
-            <h3 style="font-size: 18px; margin-bottom: 10px; color: #333;">
+<div class="greenview-product-container" style="margin: 30px 0; padding: 20px; background: #f9fafb; border-radius: 8px;">
+    <?php if ($block->is3DEnabled() && $fileUrl): ?>
+        <div class="greenview-3d-viewer-wrapper" style="margin-bottom: 20px;">
+            <h3 style="font-size: 20px; margin-bottom: 15px; color: #333; font-weight: 600;">
                 🎨 Explore in 3D
             </h3>
-            <?= $block->get3DViewerHtml() ?>
+            <div style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <cds-splat
+                    src="<?= $block->escapeUrl($fileUrl) ?>"
+                    style="width: 100%; height: 500px; display: block;"
+                    animate="false">
+                </cds-splat>
+            </div>
+            <p style="font-size: 13px; color: #666; margin-top: 10px; text-align: center;">
+                💡 Click and drag to rotate • Scroll to zoom
+            </p>
         </div>
     <?php endif; ?>
 
-    <?php if ($block->isAREnabled()): ?>
-        <div class="greenview-ar-button-wrapper" style="margin-top: 15px; text-align: center;">
-            <?= $block->getARButtonHtml() ?>
-            <p style="font-size: 12px; color: #666; margin-top: 8px;">
+    <?php if ($block->isAREnabled() && $slug): ?>
+        <div class="greenview-ar-button-wrapper" style="margin-top: 20px; text-align: center;">
+            <?php
+            // AR Button inline rendering
+            $arUrl = 'https://green-view.nl/app/viewer/' . $block->escapeHtmlAttr($slug);
+            $qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($arUrl);
+            $isMobile = preg_match('/(android|iphone|ipad)/i', $_SERVER['HTTP_USER_AGENT'] ?? '');
+            ?>
+
+            <button
+                onclick="<?= $isMobile ? "window.location.href='" . $block->escapeJs($arUrl) . "'" : "document.getElementById('greenview-qr-modal-" . $block->escapeHtmlAttr($slug) . "').style.display='flex'" ?>"
+                style="background: #667eea; color: #ffffff; border: 2px solid #667eea; padding: 12px 30px; font-size: 16px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; min-width: 200px;"
+                onmouseover="this.style.background='#5568d3'"
+                onmouseout="this.style.background='#667eea'">
+                📱 View in AR
+            </button>
+
+            <?php if (!$isMobile): ?>
+            <div id="greenview-qr-modal-<?= $block->escapeHtmlAttr($slug) ?>"
+                 style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center;"
+                 onclick="this.style.display='none'">
+                <div style="background: white; padding: 30px; border-radius: 12px; text-align: center; max-width: 400px;" onclick="event.stopPropagation()">
+                    <h3 style="margin: 0 0 20px 0; font-size: 22px; color: #333;">Scan with Your Phone</h3>
+                    <img src="<?= $block->escapeUrl($qrUrl) ?>" alt="QR Code" style="max-width: 100%; height: auto; border-radius: 8px;"/>
+                    <p style="margin: 20px 0 10px; color: #666; font-size: 14px;">Open your phone camera and scan this QR code</p>
+                    <button onclick="document.getElementById('greenview-qr-modal-<?= $block->escapeHtmlAttr($slug) ?>').style.display='none'"
+                            style="margin-top: 15px; padding: 10px 25px; background: #667eea; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600;">
+                        Close
+                    </button>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <p style="font-size: 13px; color: #666; margin-top: 12px;">
                 📱 View this product in your space using Augmented Reality
             </p>
         </div>
